@@ -1,0 +1,27 @@
+{
+    "name": "valu-digital/ptv-client-for-wordpress",
+    "version": "0.8",
+    "description": "",
+    "keywords": [
+        "ptv",
+        "php",
+        "api"
+    ],
+    "homepage": "https://www.valu.fi",
+    "license": "GPLv2 (or later)",
+    "authors": [
+        {
+            "name": "Valu Digital Oy",
+            "homepage": "https://www.valu.fi"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+      "classmap": [ "lib/" ]
+    }
+}
