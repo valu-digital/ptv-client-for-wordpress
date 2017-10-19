@@ -141,6 +141,80 @@ class PTV_Service_Channel_Api {
 
 
 	/**
+	 * Operation create_phone
+	 *
+	 * Creates a new phone channel with the data provided as input.
+	 *
+	 * @param PTV_Phone_Channel_In $request The phone channel data. (optional)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Phone_Channel
+	 */
+	public function create_phone( $request = null ) {
+		list( $response ) = $this->create_phone_with_http_info( $request );
+		return $response;
+	}
+
+	/**
+	 * Operation create_phone_with_http_info
+	 *
+	 * Creates a new phone channel with the data provided as input.
+	 *
+	 * @param PTV_Phone_Channel_In $request The phone channel data. (optional)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Phone_Channel, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function create_phone_with_http_info( $request = null ) {
+		// parse inputs
+		$resource_path = '/api/v5/ServiceChannel/Phone';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array('application/json', 'text/json', 'application/json-patch+json') );
+
+		// body params
+		$temp_body = null;
+		if ( isset( $request ) ) {
+			$temp_body = $request;
+		}
+
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'POST',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Phone_Channel',
+			'/api/v5/ServiceChannel/Phone'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Phone_Channel', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
 	 * Operation create_printable_form
 	 *
 	 * Creates a new printable form channel with the data provided as input.
@@ -211,80 +285,6 @@ class PTV_Service_Channel_Api {
 		}
 
 		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Printable_Form_Channel', $http_header ), $status_code, $http_header );
-	}
-
-
-	/**
-	 * Operation create_service_channel
-	 *
-	 * Creates a new phone channel with the data provided as input.
-	 *
-	 * @param PTV_Phone_Channel_In $request The phone channel data. (optional)
-	 * WP_Error on non-2xx response
-	 * @return PTV_Phone_Channel
-	 */
-	public function create_service_channel( $request = null ) {
-		list( $response ) = $this->create_service_channel_with_http_info( $request );
-		return $response;
-	}
-
-	/**
-	 * Operation create_service_channel_with_http_info
-	 *
-	 * Creates a new phone channel with the data provided as input.
-	 *
-	 * @param PTV_Phone_Channel_In $request The phone channel data. (optional)
-	 * WP_Error on non-2xx response
-	 * @return array of PTV_Phone_Channel, HTTP status code, HTTP response headers (array of strings)
-	 */
-	public function create_service_channel_with_http_info( $request = null ) {
-		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/Phone';
-		$http_body = '';
-		$query_params = array();
-		$header_params = array();
-		$form_params = array();
-		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
-		if ( ! is_null( $_header_accept ) ) {
-			$header_params['Accept'] = $_header_accept;
-		}
-		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array('application/json', 'text/json', 'application/json-patch+json') );
-
-		// body params
-		$temp_body = null;
-		if ( isset( $request ) ) {
-			$temp_body = $request;
-		}
-
-		// for model (json/xml)
-		if ( isset( $temp_body ) ) {
-			$http_body = $temp_body; // $temp_body is the method argument, if present
-		} elseif ( count( $form_params ) > 0 ) {
-			$http_body = $form_params; // for HTTP post (form)
-		}
-
-		// this endpoint requires OAuth (access token)
-		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
-			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
-		}
-
-		// make the API Call
-		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
-			$resource_path,
-			'POST',
-			$query_params,
-			$http_body,
-			$header_params,
-			'PTV_Phone_Channel',
-			'/api/v5/ServiceChannel/Phone'
-		);
-
-		if ( is_wp_error( $response ) ) {
-			$response = array( $response, $status_code, $http_header );
-			return $response;
-		}
-
-		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Phone_Channel', $http_header ), $status_code, $http_header );
 	}
 
 
@@ -363,7 +363,7 @@ class PTV_Service_Channel_Api {
 
 
 	/**
-	 * Operation create_web_page
+	 * Operation create_webpage
 	 *
 	 * Creates a new web page channel with the data provided as input.
 	 *
@@ -371,13 +371,13 @@ class PTV_Service_Channel_Api {
 	 * WP_Error on non-2xx response
 	 * @return PTV_Web_Page_Channel
 	 */
-	public function create_web_page( $request = null ) {
-		list( $response ) = $this->create_web_page_with_http_info( $request );
+	public function create_webpage( $request = null ) {
+		list( $response ) = $this->create_webpage_with_http_info( $request );
 		return $response;
 	}
 
 	/**
-	 * Operation create_web_page_with_http_info
+	 * Operation create_webpage_with_http_info
 	 *
 	 * Creates a new web page channel with the data provided as input.
 	 *
@@ -385,7 +385,7 @@ class PTV_Service_Channel_Api {
 	 * WP_Error on non-2xx response
 	 * @return array of PTV_Web_Page_Channel, HTTP status code, HTTP response headers (array of strings)
 	 */
-	public function create_web_page_with_http_info( $request = null ) {
+	public function create_webpage_with_http_info( $request = null ) {
 		// parse inputs
 		$resource_path = '/api/v5/ServiceChannel/WebPage';
 		$http_body = '';

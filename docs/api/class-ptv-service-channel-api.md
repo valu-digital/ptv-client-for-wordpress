@@ -5,10 +5,10 @@ All URIs are relative to *https://localhost/*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_echannel**](PTV_Service_Channel_Api.md#create_echannel) | **POST** /api/v5/ServiceChannel/EChannel | Creates a new electronic channel with the data provided as input.
+[**create_phone**](PTV_Service_Channel_Api.md#create_phone) | **POST** /api/v5/ServiceChannel/Phone | Creates a new phone channel with the data provided as input.
 [**create_printable_form**](PTV_Service_Channel_Api.md#create_printable_form) | **POST** /api/v5/ServiceChannel/PrintableForm | Creates a new printable form channel with the data provided as input.
-[**create_service_channel**](PTV_Service_Channel_Api.md#create_service_channel) | **POST** /api/v5/ServiceChannel/Phone | Creates a new phone channel with the data provided as input.
 [**create_service_location**](PTV_Service_Channel_Api.md#create_service_location) | **POST** /api/v5/ServiceChannel/ServiceLocation | Creates a new service location channel with the data provided as input.
-[**create_web_page**](PTV_Service_Channel_Api.md#create_web_page) | **POST** /api/v5/ServiceChannel/WebPage | Creates a new web page channel with the data provided as input.
+[**create_webpage**](PTV_Service_Channel_Api.md#create_webpage) | **POST** /api/v5/ServiceChannel/WebPage | Creates a new web page channel with the data provided as input.
 [**get_service_channel_by_id**](PTV_Service_Channel_Api.md#get_service_channel_by_id) | **GET** /api/v5/ServiceChannel/{id} | Fetches all the information related to a single service channel.
 [**get_service_channel_by_type**](PTV_Service_Channel_Api.md#get_service_channel_by_type) | **GET** /api/v5/ServiceChannel/type/{type} | Gets a list of certain type of published service channels.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
 [**get_service_channels**](PTV_Service_Channel_Api.md#get_service_channels) | **GET** /api/v5/ServiceChannel | Gets all published service channels within PTV as a list of service channel ids and names.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
@@ -75,6 +75,55 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+# **create_phone**
+> PTV_Phone_Channel create_phone( $request )
+
+Creates a new phone channel with the data provided as input.
+
+<para>HTTP status code 400 response model is a dictionary where key is property name and value is a list of error messages.</para>  <code>              {                  \"ServiceChannelNames\":[                      \"The ServiceChannelNames field is required.\"                  ]              }              </code>
+
+### Example
+```php
+<?php
+require_once( __DIR__ . '/vendor/autoload.php' );
+
+// Configure OAuth2 access token for authorization: oauth2
+PTV_Api_Client_Configuration::get_default_configuration()->set_access_token( 'YOUR_ACCESS_TOKEN' );
+
+$api_instance = new PTV_Service_Channel_Api();
+$request = new PTV_Phone_Channel_In(); // PTV_Phone_Channel_In | The phone channel data.
+
+
+$result = $api_instance->create_phone( $request );
+
+if( ! is_wp_error( $result ) ){
+	print_r( $result );
+}
+
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**PTV_Phone_Channel_In**](../model/PTV_Phone_Channel_In.md)| The phone channel data. | [optional]
+
+### Return type
+
+[**PTV_Phone_Channel**](../model/PTV_Phone_Channel.md)
+
+### Authorization
+
+[oauth2](../../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **create_printable_form**
 > PTV_Printable_Form_Channel create_printable_form( $request )
 
@@ -112,55 +161,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PTV_Printable_Form_Channel**](../model/PTV_Printable_Form_Channel.md)
-
-### Authorization
-
-[oauth2](../../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, text/json, application/json-patch+json
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-# **create_service_channel**
-> PTV_Phone_Channel create_service_channel( $request )
-
-Creates a new phone channel with the data provided as input.
-
-<para>HTTP status code 400 response model is a dictionary where key is property name and value is a list of error messages.</para>  <code>              {                  \"ServiceChannelNames\":[                      \"The ServiceChannelNames field is required.\"                  ]              }              </code>
-
-### Example
-```php
-<?php
-require_once( __DIR__ . '/vendor/autoload.php' );
-
-// Configure OAuth2 access token for authorization: oauth2
-PTV_Api_Client_Configuration::get_default_configuration()->set_access_token( 'YOUR_ACCESS_TOKEN' );
-
-$api_instance = new PTV_Service_Channel_Api();
-$request = new PTV_Phone_Channel_In(); // PTV_Phone_Channel_In | The phone channel data.
-
-
-$result = $api_instance->create_service_channel( $request );
-
-if( ! is_wp_error( $result ) ){
-	print_r( $result );
-}
-
-?>
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **request** | [**PTV_Phone_Channel_In**](../model/PTV_Phone_Channel_In.md)| The phone channel data. | [optional]
-
-### Return type
-
-[**PTV_Phone_Channel**](../model/PTV_Phone_Channel.md)
 
 ### Authorization
 
@@ -222,8 +222,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-# **create_web_page**
-> PTV_Web_Page_Channel create_web_page( $request )
+# **create_webpage**
+> PTV_Web_Page_Channel create_webpage( $request )
 
 Creates a new web page channel with the data provided as input.
 
@@ -241,7 +241,7 @@ $api_instance = new PTV_Service_Channel_Api();
 $request = new PTV_Web_Page_Channel_In(); // PTV_Web_Page_Channel_In | The web page channel data.
 
 
-$result = $api_instance->create_web_page( $request );
+$result = $api_instance->create_webpage( $request );
 
 if( ! is_wp_error( $result ) ){
 	print_r( $result );
