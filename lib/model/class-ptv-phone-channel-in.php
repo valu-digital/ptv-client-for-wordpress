@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Phone_Channel_In Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of phone channel for IN api
+ * @description OPEN API V7 - View Model of phone channel for IN api
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -44,7 +44,7 @@ class PTV_Phone_Channel_In implements ArrayAccess {
 		'service_channel_descriptions' => 'PTV_Localized_List_Item[]',
 		'area_type' => 'string',
 		'areas' => 'PTV_Area_In[]',
-		'phone_numbers' => 'PTV_Phone_Channel_Phone[]',
+		'phone_numbers' => 'PTV_Phone_With_Type[]',
 		'urls' => 'PTV_Language_Item[]',
 		'support_emails' => 'PTV_Language_Item[]',
 		'languages' => 'string[]',
@@ -176,6 +176,15 @@ class PTV_Phone_Channel_In implements ArrayAccess {
 		if ( null === $this->container['organization_id'] ) {
 			$invalid_properties[] = "'organization_id' can't be null";
 		}
+		if ( null === $this->container['service_channel_names'] ) {
+			$invalid_properties[] = "'service_channel_names' can't be null";
+		}
+		if ( null === $this->container['service_channel_descriptions'] ) {
+			$invalid_properties[] = "'service_channel_descriptions' can't be null";
+		}
+		if ( null === $this->container['languages'] ) {
+			$invalid_properties[] = "'languages' can't be null";
+		}
 		if ( null === $this->container['publishing_status'] ) {
 			$invalid_properties[] = "'publishing_status' can't be null";
 		}
@@ -196,6 +205,15 @@ class PTV_Phone_Channel_In implements ArrayAccess {
 		if ( null === $this->container['organization_id'] ) {
 			return false;
 		}
+		if ( null === $this->container['service_channel_names'] ) {
+			return false;
+		}
+		if ( null === $this->container['service_channel_descriptions'] ) {
+			return false;
+		}
+		if ( null === $this->container['languages'] ) {
+			return false;
+		}
 		if ( null === $this->container['publishing_status'] ) {
 			return false;
 		}
@@ -213,7 +231,7 @@ class PTV_Phone_Channel_In implements ArrayAccess {
 
 	/**
 	 * Sets source_id
-	 * @param string $source_id External system identifier for this service channel.
+	 * @param string $source_id External system identifier for this service channel. User needs to be logged in to be able to get/set value.
 	 * @return $this
 	 */
 	public function set_source_id( $source_id ) {
@@ -324,7 +342,7 @@ class PTV_Phone_Channel_In implements ArrayAccess {
 
 	/**
 	 * Gets phone_numbers
-	 * @return PTV_Phone_Channel_Phone[]
+	 * @return PTV_Phone_With_Type[]
 	 */
 	public function get_phone_numbers() {
 		return $this->container['phone_numbers'];
@@ -332,7 +350,7 @@ class PTV_Phone_Channel_In implements ArrayAccess {
 
 	/**
 	 * Sets phone_numbers
-	 * @param PTV_Phone_Channel_Phone[] $phone_numbers List of phone numbers for the service channel.
+	 * @param PTV_Phone_With_Type[] $phone_numbers List of phone numbers for the service channel.
 	 * @return $this
 	 */
 	public function set_phone_numbers( $phone_numbers ) {
@@ -427,7 +445,7 @@ class PTV_Phone_Channel_In implements ArrayAccess {
 
 	/**
 	 * Sets publishing_status
-	 * @param string $publishing_status Service channel publishing status. Values: Draft or Published.
+	 * @param string $publishing_status Service channel publishing status. Values: Draft, Published, Deleted or Modified.
 	 * @return $this
 	 */
 	public function set_publishing_status( $publishing_status ) {

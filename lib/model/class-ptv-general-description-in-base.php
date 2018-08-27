@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_General_Description_In_Base Class Doc Comment
  *
  * @category    Class
- * @description OPEN API - View Model of general description for IN api base (PUT)
+ * @description OPEN API V6 - View Model of general description for IN api base (PUT)
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -54,6 +54,7 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 		'delete_all_life_events' => 'bool',
 		'delete_all_industrial_classes' => 'bool',
 		'delete_all_laws' => 'bool',
+		'delete_service_charge_type' => 'bool',
 	);
 
 	public static function types() {
@@ -81,6 +82,7 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 		'delete_all_life_events' => 'deleteAllLifeEvents',
 		'delete_all_industrial_classes' => 'deleteAllIndustrialClasses',
 		'delete_all_laws' => 'deleteAllLaws',
+		'delete_service_charge_type' => 'deleteServiceChargeType',
 	);
 
 
@@ -105,6 +107,7 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 		'delete_all_life_events' => 'set_delete_all_life_events',
 		'delete_all_industrial_classes' => 'set_delete_all_industrial_classes',
 		'delete_all_laws' => 'set_delete_all_laws',
+		'delete_service_charge_type' => 'set_delete_service_charge_type',
 	);
 
 
@@ -129,6 +132,7 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 		'delete_all_life_events' => 'get_delete_all_life_events',
 		'delete_all_industrial_classes' => 'get_delete_all_industrial_classes',
 		'delete_all_laws' => 'get_delete_all_laws',
+		'delete_service_charge_type' => 'get_delete_service_charge_type',
 	);
 
 	public static function attribute_map() {
@@ -174,6 +178,7 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 		$this->container['delete_all_life_events'] = isset( $data['delete_all_life_events'] ) ? $data['delete_all_life_events'] : null;
 		$this->container['delete_all_industrial_classes'] = isset( $data['delete_all_industrial_classes'] ) ? $data['delete_all_industrial_classes'] : null;
 		$this->container['delete_all_laws'] = isset( $data['delete_all_laws'] ) ? $data['delete_all_laws'] : null;
+		$this->container['delete_service_charge_type'] = isset( $data['delete_service_charge_type'] ) ? $data['delete_service_charge_type'] : null;
 	}
 
 	/**
@@ -184,6 +189,9 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -195,6 +203,9 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 	 */
 	public function valid() {
 
+		if ( null === $this->container['publishing_status'] ) {
+			return false;
+		}
 		return true;
 	}
 
@@ -380,7 +391,7 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets type
-	 * @param string $type Service type. Possible values are: Service or PermissionAndObligation.
+	 * @param string $type Service type. Possible values are: Service, PermissionAndObligation or ProfessionalQualifications.
 	 * @return $this
 	 */
 	public function set_type( $type ) {
@@ -499,6 +510,25 @@ class PTV_General_Description_In_Base implements ArrayAccess {
 	 */
 	public function set_delete_all_laws( $delete_all_laws ) {
 		$this->container['delete_all_laws'] = $delete_all_laws;
+
+		return $this;
+	}
+
+	/**
+	 * Gets delete_service_charge_type
+	 * @return bool
+	 */
+	public function get_delete_service_charge_type() {
+		return $this->container['delete_service_charge_type'];
+	}
+
+	/**
+	 * Sets delete_service_charge_type
+	 * @param bool $delete_service_charge_type Set to true to delete service charge type (ServiceChargeType property for this object should be empty when this option is used).
+	 * @return $this
+	 */
+	public function set_delete_service_charge_type( $delete_service_charge_type ) {
+		$this->container['delete_service_charge_type'] = $delete_service_charge_type;
 
 		return $this;
 	}

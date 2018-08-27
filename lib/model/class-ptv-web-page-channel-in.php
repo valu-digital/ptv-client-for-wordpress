@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Web_Page_Channel_In Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of web page channel for IN api
+ * @description OPEN API V6 - View Model of web page channel for IN api
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -48,6 +48,7 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 		'languages' => 'string[]',
 		'publishing_status' => 'string',
 		'is_visible_for_all' => 'bool',
+		'services' => 'string[]',
 	);
 
 	public static function types() {
@@ -69,6 +70,7 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 		'languages' => 'languages',
 		'publishing_status' => 'publishingStatus',
 		'is_visible_for_all' => 'isVisibleForAll',
+		'services' => 'services',
 	);
 
 
@@ -87,6 +89,7 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 		'languages' => 'set_languages',
 		'publishing_status' => 'set_publishing_status',
 		'is_visible_for_all' => 'set_is_visible_for_all',
+		'services' => 'set_services',
 	);
 
 
@@ -105,6 +108,7 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 		'languages' => 'get_languages',
 		'publishing_status' => 'get_publishing_status',
 		'is_visible_for_all' => 'get_is_visible_for_all',
+		'services' => 'get_services',
 	);
 
 	public static function attribute_map() {
@@ -144,6 +148,7 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 		$this->container['languages'] = isset( $data['languages'] ) ? $data['languages'] : null;
 		$this->container['publishing_status'] = isset( $data['publishing_status'] ) ? $data['publishing_status'] : null;
 		$this->container['is_visible_for_all'] = isset( $data['is_visible_for_all'] ) ? $data['is_visible_for_all'] : null;
+		$this->container['services'] = isset( $data['services'] ) ? $data['services'] : null;
 	}
 
 	/**
@@ -160,6 +165,18 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 
 		if ( null === $this->container['organization_id'] ) {
 			$invalid_properties[] = "'organization_id' can't be null";
+		}
+		if ( null === $this->container['service_channel_names'] ) {
+			$invalid_properties[] = "'service_channel_names' can't be null";
+		}
+		if ( null === $this->container['service_channel_descriptions'] ) {
+			$invalid_properties[] = "'service_channel_descriptions' can't be null";
+		}
+		if ( null === $this->container['urls'] ) {
+			$invalid_properties[] = "'urls' can't be null";
+		}
+		if ( null === $this->container['languages'] ) {
+			$invalid_properties[] = "'languages' can't be null";
 		}
 		if ( null === $this->container['publishing_status'] ) {
 			$invalid_properties[] = "'publishing_status' can't be null";
@@ -181,6 +198,18 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 		if ( null === $this->container['organization_id'] ) {
 			return false;
 		}
+		if ( null === $this->container['service_channel_names'] ) {
+			return false;
+		}
+		if ( null === $this->container['service_channel_descriptions'] ) {
+			return false;
+		}
+		if ( null === $this->container['urls'] ) {
+			return false;
+		}
+		if ( null === $this->container['languages'] ) {
+			return false;
+		}
 		if ( null === $this->container['publishing_status'] ) {
 			return false;
 		}
@@ -198,7 +227,7 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 
 	/**
 	 * Sets source_id
-	 * @param string $source_id External system identifier for this service channel.
+	 * @param string $source_id External system identifier for this service channel. User needs to be logged in to be able to get/set value.
 	 * @return $this
 	 */
 	public function set_source_id( $source_id ) {
@@ -379,6 +408,25 @@ class PTV_Web_Page_Channel_In implements ArrayAccess {
 	 */
 	public function set_is_visible_for_all( $is_visible_for_all ) {
 		$this->container['is_visible_for_all'] = $is_visible_for_all;
+
+		return $this;
+	}
+
+	/**
+	 * Gets services
+	 * @return string[]
+	 */
+	public function get_services() {
+		return $this->container['services'];
+	}
+
+	/**
+	 * Sets services
+	 * @param string[] $services List of related services (GUID).
+	 * @return $this
+	 */
+	public function set_services( $services ) {
+		$this->container['services'] = $services;
 
 		return $this;
 	}

@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Organization_In_Base Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of organization for IN api - base
+ * @description OPEN API V7 - View Model of organization for IN api - base
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -46,20 +46,22 @@ class PTV_Organization_In_Base implements ArrayAccess {
 		'business_name' => 'string',
 		'organization_names' => 'PTV_Localized_List_Item[]',
 		'display_name_type' => 'PTV_Name_Type_By_Language[]',
-		'organization_descriptions' => 'PTV_Language_Item[]',
 		'area_type' => 'string',
 		'sub_area_type' => 'string',
 		'areas' => 'string[]',
+		'organization_descriptions' => 'PTV_Localized_List_Item[]',
 		'email_addresses' => 'PTV_Email[]',
 		'phone_numbers' => 'PTV_Phone[]',
 		'web_pages' => 'PTV_Web_Page_With_Order_Number[]',
-		'addresses' => 'PTV_Address_With_Type_In[]',
+		'addresses' => 'PTV_Address_With_Foreign_In[]',
+		'electronic_invoicings' => 'PTV_Organization_Einvoicing[]',
 		'publishing_status' => 'string',
 		'parent_organization_id' => 'string',
 		'delete_all_emails' => 'bool',
 		'delete_all_phones' => 'bool',
 		'delete_all_web_pages' => 'bool',
 		'delete_all_addresses' => 'bool',
+		'delete_all_electronic_invoicings' => 'bool',
 	);
 
 	public static function types() {
@@ -79,20 +81,22 @@ class PTV_Organization_In_Base implements ArrayAccess {
 		'business_name' => 'businessName',
 		'organization_names' => 'organizationNames',
 		'display_name_type' => 'displayNameType',
-		'organization_descriptions' => 'organizationDescriptions',
 		'area_type' => 'areaType',
 		'sub_area_type' => 'subAreaType',
 		'areas' => 'areas',
+		'organization_descriptions' => 'organizationDescriptions',
 		'email_addresses' => 'emailAddresses',
 		'phone_numbers' => 'phoneNumbers',
 		'web_pages' => 'webPages',
 		'addresses' => 'addresses',
+		'electronic_invoicings' => 'electronicInvoicings',
 		'publishing_status' => 'publishingStatus',
 		'parent_organization_id' => 'parentOrganizationId',
 		'delete_all_emails' => 'deleteAllEmails',
 		'delete_all_phones' => 'deleteAllPhones',
 		'delete_all_web_pages' => 'deleteAllWebPages',
 		'delete_all_addresses' => 'deleteAllAddresses',
+		'delete_all_electronic_invoicings' => 'deleteAllElectronicInvoicings',
 	);
 
 
@@ -109,20 +113,22 @@ class PTV_Organization_In_Base implements ArrayAccess {
 		'business_name' => 'set_business_name',
 		'organization_names' => 'set_organization_names',
 		'display_name_type' => 'set_display_name_type',
-		'organization_descriptions' => 'set_organization_descriptions',
 		'area_type' => 'set_area_type',
 		'sub_area_type' => 'set_sub_area_type',
 		'areas' => 'set_areas',
+		'organization_descriptions' => 'set_organization_descriptions',
 		'email_addresses' => 'set_email_addresses',
 		'phone_numbers' => 'set_phone_numbers',
 		'web_pages' => 'set_web_pages',
 		'addresses' => 'set_addresses',
+		'electronic_invoicings' => 'set_electronic_invoicings',
 		'publishing_status' => 'set_publishing_status',
 		'parent_organization_id' => 'set_parent_organization_id',
 		'delete_all_emails' => 'set_delete_all_emails',
 		'delete_all_phones' => 'set_delete_all_phones',
 		'delete_all_web_pages' => 'set_delete_all_web_pages',
 		'delete_all_addresses' => 'set_delete_all_addresses',
+		'delete_all_electronic_invoicings' => 'set_delete_all_electronic_invoicings',
 	);
 
 
@@ -139,20 +145,22 @@ class PTV_Organization_In_Base implements ArrayAccess {
 		'business_name' => 'get_business_name',
 		'organization_names' => 'get_organization_names',
 		'display_name_type' => 'get_display_name_type',
-		'organization_descriptions' => 'get_organization_descriptions',
 		'area_type' => 'get_area_type',
 		'sub_area_type' => 'get_sub_area_type',
 		'areas' => 'get_areas',
+		'organization_descriptions' => 'get_organization_descriptions',
 		'email_addresses' => 'get_email_addresses',
 		'phone_numbers' => 'get_phone_numbers',
 		'web_pages' => 'get_web_pages',
 		'addresses' => 'get_addresses',
+		'electronic_invoicings' => 'get_electronic_invoicings',
 		'publishing_status' => 'get_publishing_status',
 		'parent_organization_id' => 'get_parent_organization_id',
 		'delete_all_emails' => 'get_delete_all_emails',
 		'delete_all_phones' => 'get_delete_all_phones',
 		'delete_all_web_pages' => 'get_delete_all_web_pages',
 		'delete_all_addresses' => 'get_delete_all_addresses',
+		'delete_all_electronic_invoicings' => 'get_delete_all_electronic_invoicings',
 	);
 
 	public static function attribute_map() {
@@ -190,20 +198,22 @@ class PTV_Organization_In_Base implements ArrayAccess {
 		$this->container['business_name'] = isset( $data['business_name'] ) ? $data['business_name'] : null;
 		$this->container['organization_names'] = isset( $data['organization_names'] ) ? $data['organization_names'] : null;
 		$this->container['display_name_type'] = isset( $data['display_name_type'] ) ? $data['display_name_type'] : null;
-		$this->container['organization_descriptions'] = isset( $data['organization_descriptions'] ) ? $data['organization_descriptions'] : null;
 		$this->container['area_type'] = isset( $data['area_type'] ) ? $data['area_type'] : null;
 		$this->container['sub_area_type'] = isset( $data['sub_area_type'] ) ? $data['sub_area_type'] : null;
 		$this->container['areas'] = isset( $data['areas'] ) ? $data['areas'] : null;
+		$this->container['organization_descriptions'] = isset( $data['organization_descriptions'] ) ? $data['organization_descriptions'] : null;
 		$this->container['email_addresses'] = isset( $data['email_addresses'] ) ? $data['email_addresses'] : null;
 		$this->container['phone_numbers'] = isset( $data['phone_numbers'] ) ? $data['phone_numbers'] : null;
 		$this->container['web_pages'] = isset( $data['web_pages'] ) ? $data['web_pages'] : null;
 		$this->container['addresses'] = isset( $data['addresses'] ) ? $data['addresses'] : null;
+		$this->container['electronic_invoicings'] = isset( $data['electronic_invoicings'] ) ? $data['electronic_invoicings'] : null;
 		$this->container['publishing_status'] = isset( $data['publishing_status'] ) ? $data['publishing_status'] : null;
 		$this->container['parent_organization_id'] = isset( $data['parent_organization_id'] ) ? $data['parent_organization_id'] : null;
 		$this->container['delete_all_emails'] = isset( $data['delete_all_emails'] ) ? $data['delete_all_emails'] : null;
 		$this->container['delete_all_phones'] = isset( $data['delete_all_phones'] ) ? $data['delete_all_phones'] : null;
 		$this->container['delete_all_web_pages'] = isset( $data['delete_all_web_pages'] ) ? $data['delete_all_web_pages'] : null;
 		$this->container['delete_all_addresses'] = isset( $data['delete_all_addresses'] ) ? $data['delete_all_addresses'] : null;
+		$this->container['delete_all_electronic_invoicings'] = isset( $data['delete_all_electronic_invoicings'] ) ? $data['delete_all_electronic_invoicings'] : null;
 	}
 
 	/**
@@ -234,6 +244,9 @@ class PTV_Organization_In_Base implements ArrayAccess {
 			$invalid_properties[] = "invalid value for 'business_code', must be conform to the pattern /^[0-9]{7}-[0-9]{1}$/.";
 		}
 
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -260,6 +273,9 @@ class PTV_Organization_In_Base implements ArrayAccess {
 		if ( ! preg_match( '/^[0-9]{7}-[0-9]{1}$/', $this->container['business_code'] ) ) {
 			return false;
 		}
+		if ( null === $this->container['publishing_status'] ) {
+			return false;
+		}
 		return true;
 	}
 
@@ -274,7 +290,7 @@ class PTV_Organization_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets source_id
-	 * @param string $source_id Organization external system identifier.
+	 * @param string $source_id Organization external system identifier. User needs to be logged in to be able to get/set value.
 	 * @return $this
 	 */
 	public function set_source_id( $source_id ) {
@@ -439,25 +455,6 @@ class PTV_Organization_In_Base implements ArrayAccess {
 	}
 
 	/**
-	 * Gets organization_descriptions
-	 * @return PTV_Language_Item[]
-	 */
-	public function get_organization_descriptions() {
-		return $this->container['organization_descriptions'];
-	}
-
-	/**
-	 * Sets organization_descriptions
-	 * @param PTV_Language_Item[] $organization_descriptions Localized list of organization descriptions. (Max.Length: 2500).
-	 * @return $this
-	 */
-	public function set_organization_descriptions( $organization_descriptions ) {
-		$this->container['organization_descriptions'] = $organization_descriptions;
-
-		return $this;
-	}
-
-	/**
 	 * Gets area_type
 	 * @return string
 	 */
@@ -510,6 +507,25 @@ class PTV_Organization_In_Base implements ArrayAccess {
 	 */
 	public function set_areas( $areas ) {
 		$this->container['areas'] = $areas;
+
+		return $this;
+	}
+
+	/**
+	 * Gets organization_descriptions
+	 * @return PTV_Localized_List_Item[]
+	 */
+	public function get_organization_descriptions() {
+		return $this->container['organization_descriptions'];
+	}
+
+	/**
+	 * Sets organization_descriptions
+	 * @param PTV_Localized_List_Item[] $organization_descriptions Localized list of organization descriptions. (Max.Length: 2500 Description). (Max.Length: 150 ShortDescription).
+	 * @return $this
+	 */
+	public function set_organization_descriptions( $organization_descriptions ) {
+		$this->container['organization_descriptions'] = $organization_descriptions;
 
 		return $this;
 	}
@@ -573,7 +589,7 @@ class PTV_Organization_In_Base implements ArrayAccess {
 
 	/**
 	 * Gets addresses
-	 * @return PTV_Address_With_Type_In[]
+	 * @return PTV_Address_With_Foreign_In[]
 	 */
 	public function get_addresses() {
 		return $this->container['addresses'];
@@ -581,11 +597,30 @@ class PTV_Organization_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets addresses
-	 * @param PTV_Address_With_Type_In[] $addresses List of addresses.
+	 * @param PTV_Address_With_Foreign_In[] $addresses List of addresses.
 	 * @return $this
 	 */
 	public function set_addresses( $addresses ) {
 		$this->container['addresses'] = $addresses;
+
+		return $this;
+	}
+
+	/**
+	 * Gets electronic_invoicings
+	 * @return PTV_Organization_Einvoicing[]
+	 */
+	public function get_electronic_invoicings() {
+		return $this->container['electronic_invoicings'];
+	}
+
+	/**
+	 * Sets electronic_invoicings
+	 * @param PTV_Organization_Einvoicing[] $electronic_invoicings List of organizations electronic invoicing information.
+	 * @return $this
+	 */
+	public function set_electronic_invoicings( $electronic_invoicings ) {
+		$this->container['electronic_invoicings'] = $electronic_invoicings;
 
 		return $this;
 	}
@@ -700,6 +735,25 @@ class PTV_Organization_In_Base implements ArrayAccess {
 	 */
 	public function set_delete_all_addresses( $delete_all_addresses ) {
 		$this->container['delete_all_addresses'] = $delete_all_addresses;
+
+		return $this;
+	}
+
+	/**
+	 * Gets delete_all_electronic_invoicings
+	 * @return bool
+	 */
+	public function get_delete_all_electronic_invoicings() {
+		return $this->container['delete_all_electronic_invoicings'];
+	}
+
+	/**
+	 * Sets delete_all_electronic_invoicings
+	 * @param bool $delete_all_electronic_invoicings Set to true to delete all existing electronic invoicing addresses (the ElectronicInvoicings collection for this object should be empty collection when this option is used).
+	 * @return $this
+	 */
+	public function set_delete_all_electronic_invoicings( $delete_all_electronic_invoicings ) {
+		$this->container['delete_all_electronic_invoicings'] = $delete_all_electronic_invoicings;
 
 		return $this;
 	}

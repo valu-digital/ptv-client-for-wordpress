@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -91,7 +91,7 @@ class PTV_Organization_Api {
 	 */
 	public function create_organization_with_http_info( $request = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/Organization';
+		$resource_path = '/api/v7/Organization';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -128,7 +128,7 @@ class PTV_Organization_Api {
 			$http_body,
 			$header_params,
 			'PTV_Organization',
-			'/api/v5/Organization'
+			'/api/v7/Organization'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -169,7 +169,7 @@ class PTV_Organization_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $code when calling get_organization_by_businesscode' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/Organization/businesscode/{code}';
+		$resource_path = '/api/v7/Organization/businesscode/{code}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -209,7 +209,7 @@ class PTV_Organization_Api {
 			$http_body,
 			$header_params,
 			'PTV_Organization[]',
-			'/api/v5/Organization/businesscode/{code}'
+			'/api/v7/Organization/businesscode/{code}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -250,7 +250,7 @@ class PTV_Organization_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling get_organization_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/Organization/{id}';
+		$resource_path = '/api/v7/Organization/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -290,7 +290,7 @@ class PTV_Organization_Api {
 			$http_body,
 			$header_params,
 			'PTV_Organization',
-			'/api/v5/Organization/{id}'
+			'/api/v7/Organization/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -299,6 +299,91 @@ class PTV_Organization_Api {
 		}
 
 		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Organization', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
+	 * Operation get_organization_by_municipality_code
+	 *
+	 * Gets a list of published organizations related to defined municipality.  Services created after certain date can be fetched by adding date as query string parameter.
+	 *
+	 * @param string $code Municipality code (required)
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page number to be fetched. (optional)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Organization_Guid_Page
+	 */
+	public function get_organization_by_municipality_code( $code, $date = null, $page = null ) {
+		list( $response ) = $this->get_organization_by_municipality_code_with_http_info( $code, $date, $page );
+		return $response;
+	}
+
+	/**
+	 * Operation get_organization_by_municipality_code_with_http_info
+	 *
+	 * Gets a list of published organizations related to defined municipality.  Services created after certain date can be fetched by adding date as query string parameter.
+	 *
+	 * @param string $code Municipality code (required)
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page number to be fetched. (optional)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Organization_Guid_Page, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function get_organization_by_municipality_code_with_http_info( $code, $date = null, $page = null ) {
+		// verify the required parameter 'code' is set
+		if ( null === $code ) {
+			throw new InvalidArgumentException( 'Missing the required parameter $code when calling get_organization_by_municipality_code' );
+		}
+		// parse inputs
+		$resource_path = '/api/v7/Organization/municipality/{code}';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
+
+		// path params
+		if ( null !== $code ) {
+			$resource_path = str_replace(
+				"{" . "code" . "}",
+				$this->api_client->get_serializer()->to_path_value( $code ),
+				$resource_path
+			);
+		}
+		
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'GET',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Organization_Guid_Page',
+			'/api/v7/Organization/municipality/{code}'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Organization_Guid_Page', $http_header ), $status_code, $http_header );
 	}
 
 
@@ -331,7 +416,7 @@ class PTV_Organization_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $oid when calling get_organization_by_oid' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/Organization/oid/{oid}';
+		$resource_path = '/api/v7/Organization/oid/{oid}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -371,7 +456,7 @@ class PTV_Organization_Api {
 			$http_body,
 			$header_params,
 			'PTV_Organization',
-			'/api/v5/Organization/oid/{oid}'
+			'/api/v7/Organization/oid/{oid}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -384,33 +469,33 @@ class PTV_Organization_Api {
 
 
 	/**
-	 * Operation get_organizations
+	 * Operation get_organization_saha
 	 *
-	 * Gets all the published organizations within PTV as a list of organization ids and names.  Organizations created/modified after certain date can be fetched by adding date as query string parameter.
+	 * Gets main organizations and two sub levels of organizations. Returns both published and archived organizations.  NOTE! This is a restricted endpoint.
 	 *
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
 	 * @param int $page The page number to be fetched. (optional)
 	 * WP_Error on non-2xx response
-	 * @return PTV_Guid_Page
+	 * @return PTV_Organization_Saha_Guid_Page
 	 */
-	public function get_organizations( $date = null, $page = null ) {
-		list( $response ) = $this->get_organizations_with_http_info( $date, $page );
+	public function get_organization_saha( $date = null, $page = null ) {
+		list( $response ) = $this->get_organization_saha_with_http_info( $date, $page );
 		return $response;
 	}
 
 	/**
-	 * Operation get_organizations_with_http_info
+	 * Operation get_organization_saha_with_http_info
 	 *
-	 * Gets all the published organizations within PTV as a list of organization ids and names.  Organizations created/modified after certain date can be fetched by adding date as query string parameter.
+	 * Gets main organizations and two sub levels of organizations. Returns both published and archived organizations.  NOTE! This is a restricted endpoint.
 	 *
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
 	 * @param int $page The page number to be fetched. (optional)
 	 * WP_Error on non-2xx response
-	 * @return array of PTV_Guid_Page, HTTP status code, HTTP response headers (array of strings)
+	 * @return array of PTV_Organization_Saha_Guid_Page, HTTP status code, HTTP response headers (array of strings)
 	 */
-	public function get_organizations_with_http_info( $date = null, $page = null ) {
+	public function get_organization_saha_with_http_info( $date = null, $page = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/Organization';
+		$resource_path = '/api/v7/Organization/saha';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -441,8 +526,8 @@ class PTV_Organization_Api {
 			$query_params,
 			$http_body,
 			$header_params,
-			'PTV_Guid_Page',
-			'/api/v5/Organization'
+			'PTV_Organization_Saha_Guid_Page',
+			'/api/v7/Organization/saha'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -450,7 +535,161 @@ class PTV_Organization_Api {
 			return $response;
 		}
 
-		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Guid_Page', $http_header ), $status_code, $http_header );
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Organization_Saha_Guid_Page', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
+	 * Operation get_organization_saha_by_id
+	 *
+	 * Fetches Saha related information of a single organization.  NOTE! This is a restricted endpoint.
+	 *
+	 * @param string $id Guid (required)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Organization_Saha
+	 */
+	public function get_organization_saha_by_id( $id ) {
+		list( $response ) = $this->get_organization_saha_by_id_with_http_info( $id );
+		return $response;
+	}
+
+	/**
+	 * Operation get_organization_saha_by_id_with_http_info
+	 *
+	 * Fetches Saha related information of a single organization.  NOTE! This is a restricted endpoint.
+	 *
+	 * @param string $id Guid (required)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Organization_Saha, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function get_organization_saha_by_id_with_http_info( $id ) {
+		// verify the required parameter 'id' is set
+		if ( null === $id ) {
+			throw new InvalidArgumentException( 'Missing the required parameter $id when calling get_organization_saha_by_id' );
+		}
+		// parse inputs
+		$resource_path = '/api/v7/Organization/saha/{id}';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
+
+		// path params
+		if ( null !== $id ) {
+			$resource_path = str_replace(
+				"{" . "id" . "}",
+				$this->api_client->get_serializer()->to_path_value( $id ),
+				$resource_path
+			);
+		}
+		
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'GET',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Organization_Saha',
+			'/api/v7/Organization/saha/{id}'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Organization_Saha', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
+	 * Operation get_organizations
+	 *
+	 * Gets all the published organizations within PTV as a list of organization ids and names.  Organizations created/modified after certain date can be fetched by adding date as query string parameter.  Archived items can be fetched by setting parameter archived to true.
+	 *
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page number to be fetched. (optional)
+	 * @param bool $archived Get archived items by setting archived to true. (optional)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Organization_Guid_Page
+	 */
+	public function get_organizations( $date = null, $page = null, $archived = null ) {
+		list( $response ) = $this->get_organizations_with_http_info( $date, $page, $archived );
+		return $response;
+	}
+
+	/**
+	 * Operation get_organizations_with_http_info
+	 *
+	 * Gets all the published organizations within PTV as a list of organization ids and names.  Organizations created/modified after certain date can be fetched by adding date as query string parameter.  Archived items can be fetched by setting parameter archived to true.
+	 *
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page number to be fetched. (optional)
+	 * @param bool $archived Get archived items by setting archived to true. (optional)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Organization_Guid_Page, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function get_organizations_with_http_info( $date = null, $page = null, $archived = null ) {
+		// parse inputs
+		$resource_path = '/api/v7/Organization';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
+
+		
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'GET',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Organization_Guid_Page',
+			'/api/v7/Organization'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Organization_Guid_Page', $http_header ), $status_code, $http_header );
 	}
 
 
@@ -485,7 +724,7 @@ class PTV_Organization_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_organization_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/Organization/{id}';
+		$resource_path = '/api/v7/Organization/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -530,7 +769,7 @@ class PTV_Organization_Api {
 			$http_body,
 			$header_params,
 			'PTV_Organization',
-			'/api/v5/Organization/{id}'
+			'/api/v7/Organization/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -573,7 +812,7 @@ class PTV_Organization_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $source_id when calling update_organization_by_source_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/Organization/sourceId/{sourceId}';
+		$resource_path = '/api/v7/Organization/sourceId/{sourceId}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -618,7 +857,7 @@ class PTV_Organization_Api {
 			$http_body,
 			$header_params,
 			'PTV_Organization',
-			'/api/v5/Organization/sourceId/{sourceId}'
+			'/api/v7/Organization/sourceId/{sourceId}'
 		);
 
 		if ( is_wp_error( $response ) ) {

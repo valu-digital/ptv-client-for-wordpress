@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Service_And_Channel_Relation_In_Base Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of service and channel relation IN (PUT).
+ * @description OPEN API V7 - View Model of service and channel relation IN (PUT).
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */

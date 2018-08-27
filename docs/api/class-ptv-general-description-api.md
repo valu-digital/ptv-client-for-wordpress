@@ -4,10 +4,10 @@ All URIs are relative to *https://localhost/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_general_description**](PTV_General_Description_Api.md#create_general_description) | **POST** /api/v5/GeneralDescription | Creates a new general description with the data provided as input.
-[**get_general_description_by_id**](PTV_General_Description_Api.md#get_general_description_by_id) | **GET** /api/v5/GeneralDescription/{id} | Fetches all the information related to a single statutory service general description.
-[**get_general_descriptions**](PTV_General_Description_Api.md#get_general_descriptions) | **GET** /api/v5/GeneralDescription | Gets all the statutory service general descriptions within PTV as a list of ids and names.  Descriptions created/modified after certain date can be fetched by adding date as query string parameter.
-[**update_general_description**](PTV_General_Description_Api.md#update_general_description) | **PUT** /api/v5/GeneralDescription/{id} | Updates the defined general description with the data provided as input.
+[**create_general_description**](PTV_General_Description_Api.md#create_general_description) | **POST** /api/v7/GeneralDescription | Creates a new general description with the data provided as input.
+[**get_general_description_by_id**](PTV_General_Description_Api.md#get_general_description_by_id) | **GET** /api/v7/GeneralDescription/{id} | Fetches all the information related to a single statutory service general description.
+[**get_general_descriptions**](PTV_General_Description_Api.md#get_general_descriptions) | **GET** /api/v7/GeneralDescription | Gets all the statutory service general descriptions within PTV as a list of ids and names.  Descriptions created/modified after certain date can be fetched by adding date as query string parameter.
+[**update_general_description_by_id**](PTV_General_Description_Api.md#update_general_description_by_id) | **PUT** /api/v7/GeneralDescription/{id} | Updates the defined general description with the data provided as input.
 
 
 # **create_general_description**
@@ -151,8 +151,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-# **update_general_description**
-> PTV_General_Description update_general_description( $id, $request )
+# **update_general_description_by_id**
+> PTV_General_Description update_general_description_by_id( $id, $request )
 
 Updates the defined general description with the data provided as input.
 
@@ -167,11 +167,11 @@ require_once( __DIR__ . '/vendor/autoload.php' );
 PTV_Api_Client_Configuration::get_default_configuration()->set_access_token( 'YOUR_ACCESS_TOKEN' );
 
 $api_instance = new PTV_General_Description_Api();
-$id = "id_example"; // string | Service identifier
+$id = "id_example"; // string | Statutory service general description identifier
 $request = new PTV_General_Description_In_Base(); // PTV_General_Description_In_Base | The general description data.
 
 
-$result = $api_instance->update_general_description( $id, $request );
+$result = $api_instance->update_general_description_by_id( $id, $request );
 
 if( ! is_wp_error( $result ) ){
 	print_r( $result );
@@ -184,7 +184,7 @@ if( ! is_wp_error( $result ) ){
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**| Service identifier |
+ **id** | **string**| Statutory service general description identifier |
  **request** | [**PTV_General_Description_In_Base**](../model/PTV_General_Description_In_Base.md)| The general description data. | [optional]
 
 ### Return type

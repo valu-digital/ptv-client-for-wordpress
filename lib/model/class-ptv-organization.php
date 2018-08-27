@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Organization Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of organization
+ * @description OPEN API V7 - View Model of organization
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -39,6 +39,7 @@ class PTV_Organization implements ArrayAccess {
 	  */
 	protected static $types = array(
 		'id' => 'string',
+		'source_id' => 'string',
 		'oid' => 'string',
 		'parent_organization' => 'string',
 		'organization_type' => 'string',
@@ -53,9 +54,12 @@ class PTV_Organization implements ArrayAccess {
 		'email_addresses' => 'PTV_Email[]',
 		'phone_numbers' => 'PTV_Phone[]',
 		'web_pages' => 'PTV_Web_Page_With_Order_Number[]',
-		'addresses' => 'PTV_Address_With_Type_And_Coordinates[]',
+		'addresses' => 'PTV_Address[]',
+		'electronic_invoicings' => 'PTV_Organization_Einvoicing[]',
 		'publishing_status' => 'string',
 		'services' => 'PTV_Organization_Service[]',
+		'modified' => '\DateTime',
+		'sub_organizations' => 'PTV_Item[]',
 	);
 
 	public static function types() {
@@ -68,6 +72,7 @@ class PTV_Organization implements ArrayAccess {
 	 */
 	protected static $attribute_map = array(
 		'id' => 'id',
+		'source_id' => 'sourceId',
 		'oid' => 'oid',
 		'parent_organization' => 'parentOrganization',
 		'organization_type' => 'organizationType',
@@ -83,8 +88,11 @@ class PTV_Organization implements ArrayAccess {
 		'phone_numbers' => 'phoneNumbers',
 		'web_pages' => 'webPages',
 		'addresses' => 'addresses',
+		'electronic_invoicings' => 'electronicInvoicings',
 		'publishing_status' => 'publishingStatus',
 		'services' => 'services',
+		'modified' => 'modified',
+		'sub_organizations' => 'subOrganizations',
 	);
 
 
@@ -94,6 +102,7 @@ class PTV_Organization implements ArrayAccess {
 	 */
 	protected static $setters = array(
 		'id' => 'set_id',
+		'source_id' => 'set_source_id',
 		'oid' => 'set_oid',
 		'parent_organization' => 'set_parent_organization',
 		'organization_type' => 'set_organization_type',
@@ -109,8 +118,11 @@ class PTV_Organization implements ArrayAccess {
 		'phone_numbers' => 'set_phone_numbers',
 		'web_pages' => 'set_web_pages',
 		'addresses' => 'set_addresses',
+		'electronic_invoicings' => 'set_electronic_invoicings',
 		'publishing_status' => 'set_publishing_status',
 		'services' => 'set_services',
+		'modified' => 'set_modified',
+		'sub_organizations' => 'set_sub_organizations',
 	);
 
 
@@ -120,6 +132,7 @@ class PTV_Organization implements ArrayAccess {
 	 */
 	protected static $getters = array(
 		'id' => 'get_id',
+		'source_id' => 'get_source_id',
 		'oid' => 'get_oid',
 		'parent_organization' => 'get_parent_organization',
 		'organization_type' => 'get_organization_type',
@@ -135,8 +148,11 @@ class PTV_Organization implements ArrayAccess {
 		'phone_numbers' => 'get_phone_numbers',
 		'web_pages' => 'get_web_pages',
 		'addresses' => 'get_addresses',
+		'electronic_invoicings' => 'get_electronic_invoicings',
 		'publishing_status' => 'get_publishing_status',
 		'services' => 'get_services',
+		'modified' => 'get_modified',
+		'sub_organizations' => 'get_sub_organizations',
 	);
 
 	public static function attribute_map() {
@@ -167,6 +183,7 @@ class PTV_Organization implements ArrayAccess {
 	 */
 	public function __construct( array $data = null ) {
 		$this->container['id'] = isset( $data['id'] ) ? $data['id'] : null;
+		$this->container['source_id'] = isset( $data['source_id'] ) ? $data['source_id'] : null;
 		$this->container['oid'] = isset( $data['oid'] ) ? $data['oid'] : null;
 		$this->container['parent_organization'] = isset( $data['parent_organization'] ) ? $data['parent_organization'] : null;
 		$this->container['organization_type'] = isset( $data['organization_type'] ) ? $data['organization_type'] : null;
@@ -182,8 +199,11 @@ class PTV_Organization implements ArrayAccess {
 		$this->container['phone_numbers'] = isset( $data['phone_numbers'] ) ? $data['phone_numbers'] : null;
 		$this->container['web_pages'] = isset( $data['web_pages'] ) ? $data['web_pages'] : null;
 		$this->container['addresses'] = isset( $data['addresses'] ) ? $data['addresses'] : null;
+		$this->container['electronic_invoicings'] = isset( $data['electronic_invoicings'] ) ? $data['electronic_invoicings'] : null;
 		$this->container['publishing_status'] = isset( $data['publishing_status'] ) ? $data['publishing_status'] : null;
 		$this->container['services'] = isset( $data['services'] ) ? $data['services'] : null;
+		$this->container['modified'] = isset( $data['modified'] ) ? $data['modified'] : null;
+		$this->container['sub_organizations'] = isset( $data['sub_organizations'] ) ? $data['sub_organizations'] : null;
 	}
 
 	/**
@@ -194,6 +214,10 @@ class PTV_Organization implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
+		if ( ! is_null( $this->container['source_id'] ) && ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			$invalid_properties[] = "invalid value for 'source_id', must be conform to the pattern /^[A-Za-z0-9-.]*$/.";
+		}
+
 		if ( ! is_null( $this->container['oid'] ) && ! preg_match( '/^[A-Za-z0-9.-]*$/', $this->container['oid'] ) ) {
 			$invalid_properties[] = "invalid value for 'oid', must be conform to the pattern /^[A-Za-z0-9.-]*$/.";
 		}
@@ -202,6 +226,9 @@ class PTV_Organization implements ArrayAccess {
 			$invalid_properties[] = "invalid value for 'business_code', must be conform to the pattern /^[0-9]{7}-[0-9]{1}$/.";
 		}
 
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -213,10 +240,16 @@ class PTV_Organization implements ArrayAccess {
 	 */
 	public function valid() {
 
+		if ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			return false;
+		}
 		if ( ! preg_match( '/^[A-Za-z0-9.-]*$/', $this->container['oid'] ) ) {
 			return false;
 		}
 		if ( ! preg_match( '/^[0-9]{7}-[0-9]{1}$/', $this->container['business_code'] ) ) {
+			return false;
+		}
+		if ( null === $this->container['publishing_status'] ) {
 			return false;
 		}
 		return true;
@@ -238,6 +271,30 @@ class PTV_Organization implements ArrayAccess {
 	 */
 	public function set_id( $id ) {
 		$this->container['id'] = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Gets source_id
+	 * @return string
+	 */
+	public function get_source_id() {
+		return $this->container['source_id'];
+	}
+
+	/**
+	 * Sets source_id
+	 * @param string $source_id Organization external system identifier. User needs to be logged in to be able to get/set value.
+	 * @return $this
+	 */
+	public function set_source_id( $source_id ) {
+
+		if ( ! is_null( $source_id ) && ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $source_id ) ) ) {
+			throw new InvalidArgumentException( "invalid value for $source_id when calling PTV_Organization., must conform to the pattern /^[A-Za-z0-9-.]*$/." );
+		}
+
+		$this->container['source_id'] = $source_id;
 
 		return $this;
 	}
@@ -452,7 +509,7 @@ class PTV_Organization implements ArrayAccess {
 
 	/**
 	 * Sets organization_descriptions
-	 * @param PTV_Localized_List_Item[] $organization_descriptions List of organizations descriptions.
+	 * @param PTV_Localized_List_Item[] $organization_descriptions Localized list of organization descriptions. (Max.Length: 2500 Description). (Max.Length: 150 ShortDescription).
 	 * @return $this
 	 */
 	public function set_organization_descriptions( $organization_descriptions ) {
@@ -520,7 +577,7 @@ class PTV_Organization implements ArrayAccess {
 
 	/**
 	 * Gets addresses
-	 * @return PTV_Address_With_Type_And_Coordinates[]
+	 * @return PTV_Address[]
 	 */
 	public function get_addresses() {
 		return $this->container['addresses'];
@@ -528,11 +585,30 @@ class PTV_Organization implements ArrayAccess {
 
 	/**
 	 * Sets addresses
-	 * @param PTV_Address_With_Type_And_Coordinates[] $addresses List of organizations addresses.
+	 * @param PTV_Address[] $addresses List of organizations addresses.
 	 * @return $this
 	 */
 	public function set_addresses( $addresses ) {
 		$this->container['addresses'] = $addresses;
+
+		return $this;
+	}
+
+	/**
+	 * Gets electronic_invoicings
+	 * @return PTV_Organization_Einvoicing[]
+	 */
+	public function get_electronic_invoicings() {
+		return $this->container['electronic_invoicings'];
+	}
+
+	/**
+	 * Sets electronic_invoicings
+	 * @param PTV_Organization_Einvoicing[] $electronic_invoicings List of organizations electronic invoicing information.
+	 * @return $this
+	 */
+	public function set_electronic_invoicings( $electronic_invoicings ) {
+		$this->container['electronic_invoicings'] = $electronic_invoicings;
 
 		return $this;
 	}
@@ -571,6 +647,44 @@ class PTV_Organization implements ArrayAccess {
 	 */
 	public function set_services( $services ) {
 		$this->container['services'] = $services;
+
+		return $this;
+	}
+
+	/**
+	 * Gets modified
+	 * @return \DateTime
+	 */
+	public function get_modified() {
+		return $this->container['modified'];
+	}
+
+	/**
+	 * Sets modified
+	 * @param \DateTime $modified Date when item was modified/created (UTC).
+	 * @return $this
+	 */
+	public function set_modified( $modified ) {
+		$this->container['modified'] = $modified;
+
+		return $this;
+	}
+
+	/**
+	 * Gets sub_organizations
+	 * @return PTV_Item[]
+	 */
+	public function get_sub_organizations() {
+		return $this->container['sub_organizations'];
+	}
+
+	/**
+	 * Sets sub_organizations
+	 * @param PTV_Item[] $sub_organizations The sub organizations
+	 * @return $this
+	 */
+	public function set_sub_organizations( $sub_organizations ) {
+		$this->container['sub_organizations'] = $sub_organizations;
 
 		return $this;
 	}

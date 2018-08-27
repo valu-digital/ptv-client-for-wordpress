@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -114,6 +114,9 @@ class PTV_Law implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
+		if ( null === $this->container['web_pages'] ) {
+			$invalid_properties[] = "'web_pages' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -125,6 +128,9 @@ class PTV_Law implements ArrayAccess {
 	 */
 	public function valid() {
 
+		if ( null === $this->container['web_pages'] ) {
+			return false;
+		}
 		return true;
 	}
 

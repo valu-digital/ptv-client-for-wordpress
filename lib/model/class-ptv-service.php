@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Service Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of service
+ * @description OPEN API V7 - View Model of service
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -39,15 +39,17 @@ class PTV_Service implements ArrayAccess {
 	  */
 	protected static $types = array(
 		'id' => 'string',
+		'source_id' => 'string',
 		'statutory_service_general_description_id' => 'string',
 		'type' => 'string',
+		'funding_type' => 'string',
 		'service_names' => 'PTV_Localized_List_Item[]',
 		'service_charge_type' => 'string',
 		'area_type' => 'string',
 		'areas' => 'PTV_Area[]',
 		'service_descriptions' => 'PTV_Localized_List_Item[]',
 		'languages' => 'string[]',
-		'service_classes' => 'PTV_Finto_Item[]',
+		'service_classes' => 'PTV_Finto_Item_With_Description[]',
 		'ontology_terms' => 'PTV_Finto_Item[]',
 		'target_groups' => 'PTV_Finto_Item[]',
 		'life_events' => 'PTV_Finto_Item[]',
@@ -57,7 +59,11 @@ class PTV_Service implements ArrayAccess {
 		'requirements' => 'PTV_Language_Item[]',
 		'service_channels' => 'PTV_Service_Service_Channel[]',
 		'organizations' => 'PTV_Service_Organization[]',
+		'service_vouchers_in_use' => 'bool',
+		'service_vouchers' => 'PTV_Service_Voucher[]',
+		'service_collections' => 'PTV_Service_Service_Collection[]',
 		'publishing_status' => 'string',
+		'modified' => '\DateTime',
 	);
 
 	public static function types() {
@@ -70,8 +76,10 @@ class PTV_Service implements ArrayAccess {
 	 */
 	protected static $attribute_map = array(
 		'id' => 'id',
+		'source_id' => 'sourceId',
 		'statutory_service_general_description_id' => 'statutoryServiceGeneralDescriptionId',
 		'type' => 'type',
+		'funding_type' => 'fundingType',
 		'service_names' => 'serviceNames',
 		'service_charge_type' => 'serviceChargeType',
 		'area_type' => 'areaType',
@@ -88,7 +96,11 @@ class PTV_Service implements ArrayAccess {
 		'requirements' => 'requirements',
 		'service_channels' => 'serviceChannels',
 		'organizations' => 'organizations',
+		'service_vouchers_in_use' => 'serviceVouchersInUse',
+		'service_vouchers' => 'serviceVouchers',
+		'service_collections' => 'serviceCollections',
 		'publishing_status' => 'publishingStatus',
+		'modified' => 'modified',
 	);
 
 
@@ -98,8 +110,10 @@ class PTV_Service implements ArrayAccess {
 	 */
 	protected static $setters = array(
 		'id' => 'set_id',
+		'source_id' => 'set_source_id',
 		'statutory_service_general_description_id' => 'set_statutory_service_general_description_id',
 		'type' => 'set_type',
+		'funding_type' => 'set_funding_type',
 		'service_names' => 'set_service_names',
 		'service_charge_type' => 'set_service_charge_type',
 		'area_type' => 'set_area_type',
@@ -116,7 +130,11 @@ class PTV_Service implements ArrayAccess {
 		'requirements' => 'set_requirements',
 		'service_channels' => 'set_service_channels',
 		'organizations' => 'set_organizations',
+		'service_vouchers_in_use' => 'set_service_vouchers_in_use',
+		'service_vouchers' => 'set_service_vouchers',
+		'service_collections' => 'set_service_collections',
 		'publishing_status' => 'set_publishing_status',
+		'modified' => 'set_modified',
 	);
 
 
@@ -126,8 +144,10 @@ class PTV_Service implements ArrayAccess {
 	 */
 	protected static $getters = array(
 		'id' => 'get_id',
+		'source_id' => 'get_source_id',
 		'statutory_service_general_description_id' => 'get_statutory_service_general_description_id',
 		'type' => 'get_type',
+		'funding_type' => 'get_funding_type',
 		'service_names' => 'get_service_names',
 		'service_charge_type' => 'get_service_charge_type',
 		'area_type' => 'get_area_type',
@@ -144,7 +164,11 @@ class PTV_Service implements ArrayAccess {
 		'requirements' => 'get_requirements',
 		'service_channels' => 'get_service_channels',
 		'organizations' => 'get_organizations',
+		'service_vouchers_in_use' => 'get_service_vouchers_in_use',
+		'service_vouchers' => 'get_service_vouchers',
+		'service_collections' => 'get_service_collections',
 		'publishing_status' => 'get_publishing_status',
+		'modified' => 'get_modified',
 	);
 
 	public static function attribute_map() {
@@ -175,8 +199,10 @@ class PTV_Service implements ArrayAccess {
 	 */
 	public function __construct( array $data = null ) {
 		$this->container['id'] = isset( $data['id'] ) ? $data['id'] : null;
+		$this->container['source_id'] = isset( $data['source_id'] ) ? $data['source_id'] : null;
 		$this->container['statutory_service_general_description_id'] = isset( $data['statutory_service_general_description_id'] ) ? $data['statutory_service_general_description_id'] : null;
 		$this->container['type'] = isset( $data['type'] ) ? $data['type'] : null;
+		$this->container['funding_type'] = isset( $data['funding_type'] ) ? $data['funding_type'] : null;
 		$this->container['service_names'] = isset( $data['service_names'] ) ? $data['service_names'] : null;
 		$this->container['service_charge_type'] = isset( $data['service_charge_type'] ) ? $data['service_charge_type'] : null;
 		$this->container['area_type'] = isset( $data['area_type'] ) ? $data['area_type'] : null;
@@ -193,7 +219,11 @@ class PTV_Service implements ArrayAccess {
 		$this->container['requirements'] = isset( $data['requirements'] ) ? $data['requirements'] : null;
 		$this->container['service_channels'] = isset( $data['service_channels'] ) ? $data['service_channels'] : null;
 		$this->container['organizations'] = isset( $data['organizations'] ) ? $data['organizations'] : null;
+		$this->container['service_vouchers_in_use'] = isset( $data['service_vouchers_in_use'] ) ? $data['service_vouchers_in_use'] : null;
+		$this->container['service_vouchers'] = isset( $data['service_vouchers'] ) ? $data['service_vouchers'] : null;
+		$this->container['service_collections'] = isset( $data['service_collections'] ) ? $data['service_collections'] : null;
 		$this->container['publishing_status'] = isset( $data['publishing_status'] ) ? $data['publishing_status'] : null;
+		$this->container['modified'] = isset( $data['modified'] ) ? $data['modified'] : null;
 	}
 
 	/**
@@ -204,6 +234,13 @@ class PTV_Service implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
+		if ( ! is_null( $this->container['source_id'] ) && ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			$invalid_properties[] = "invalid value for 'source_id', must be conform to the pattern /^[A-Za-z0-9-.]*$/.";
+		}
+
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -215,6 +252,12 @@ class PTV_Service implements ArrayAccess {
 	 */
 	public function valid() {
 
+		if ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			return false;
+		}
+		if ( null === $this->container['publishing_status'] ) {
+			return false;
+		}
 		return true;
 	}
 
@@ -234,6 +277,30 @@ class PTV_Service implements ArrayAccess {
 	 */
 	public function set_id( $id ) {
 		$this->container['id'] = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Gets source_id
+	 * @return string
+	 */
+	public function get_source_id() {
+		return $this->container['source_id'];
+	}
+
+	/**
+	 * Sets source_id
+	 * @param string $source_id External system identifier for the entity. User needs to be logged in to be able to get/set value.
+	 * @return $this
+	 */
+	public function set_source_id( $source_id ) {
+
+		if ( ! is_null( $source_id ) && ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $source_id ) ) ) {
+			throw new InvalidArgumentException( "invalid value for $source_id when calling PTV_Service., must conform to the pattern /^[A-Za-z0-9-.]*$/." );
+		}
+
+		$this->container['source_id'] = $source_id;
 
 		return $this;
 	}
@@ -277,6 +344,25 @@ class PTV_Service implements ArrayAccess {
 	}
 
 	/**
+	 * Gets funding_type
+	 * @return string
+	 */
+	public function get_funding_type() {
+		return $this->container['funding_type'];
+	}
+
+	/**
+	 * Sets funding_type
+	 * @param string $funding_type Service funding type. Possible values are: PubliclyFunded or MarketFunded.
+	 * @return $this
+	 */
+	public function set_funding_type( $funding_type ) {
+		$this->container['funding_type'] = $funding_type;
+
+		return $this;
+	}
+
+	/**
 	 * Gets service_names
 	 * @return PTV_Localized_List_Item[]
 	 */
@@ -305,7 +391,7 @@ class PTV_Service implements ArrayAccess {
 
 	/**
 	 * Sets service_charge_type
-	 * @param string $service_charge_type Service charge type. Possible values are: Charged, Free or Other.  NOTE! If service charge type has been defined within attached statutory service general description, the charge type for service is ignored.
+	 * @param string $service_charge_type Service charge type. Possible values are: Charged or Free.  NOTE! If service charge type has been defined within attached statutory service general description, the charge type for service is ignored.
 	 * @return $this
 	 */
 	public function set_service_charge_type( $service_charge_type ) {
@@ -392,7 +478,7 @@ class PTV_Service implements ArrayAccess {
 
 	/**
 	 * Gets service_classes
-	 * @return PTV_Finto_Item[]
+	 * @return PTV_Finto_Item_With_Description[]
 	 */
 	public function get_service_classes() {
 		return $this->container['service_classes'];
@@ -400,7 +486,7 @@ class PTV_Service implements ArrayAccess {
 
 	/**
 	 * Sets service_classes
-	 * @param PTV_Finto_Item[] $service_classes List of service classes related to the service.
+	 * @param PTV_Finto_Item_With_Description[] $service_classes List of service classes related to the service.
 	 * @return $this
 	 */
 	public function set_service_classes( $service_classes ) {
@@ -581,6 +667,63 @@ class PTV_Service implements ArrayAccess {
 	}
 
 	/**
+	 * Gets service_vouchers_in_use
+	 * @return bool
+	 */
+	public function get_service_vouchers_in_use() {
+		return $this->container['service_vouchers_in_use'];
+	}
+
+	/**
+	 * Sets service_vouchers_in_use
+	 * @param bool $service_vouchers_in_use Indicates if service vouchers are used in the service.
+	 * @return $this
+	 */
+	public function set_service_vouchers_in_use( $service_vouchers_in_use ) {
+		$this->container['service_vouchers_in_use'] = $service_vouchers_in_use;
+
+		return $this;
+	}
+
+	/**
+	 * Gets service_vouchers
+	 * @return PTV_Service_Voucher[]
+	 */
+	public function get_service_vouchers() {
+		return $this->container['service_vouchers'];
+	}
+
+	/**
+	 * Sets service_vouchers
+	 * @param PTV_Service_Voucher[] $service_vouchers List of service vouchers.
+	 * @return $this
+	 */
+	public function set_service_vouchers( $service_vouchers ) {
+		$this->container['service_vouchers'] = $service_vouchers;
+
+		return $this;
+	}
+
+	/**
+	 * Gets service_collections
+	 * @return PTV_Service_Service_Collection[]
+	 */
+	public function get_service_collections() {
+		return $this->container['service_collections'];
+	}
+
+	/**
+	 * Sets service_collections
+	 * @param PTV_Service_Service_Collection[] $service_collections List of service collections that the service has been linked to
+	 * @return $this
+	 */
+	public function set_service_collections( $service_collections ) {
+		$this->container['service_collections'] = $service_collections;
+
+		return $this;
+	}
+
+	/**
 	 * Gets publishing_status
 	 * @return string
 	 */
@@ -595,6 +738,25 @@ class PTV_Service implements ArrayAccess {
 	 */
 	public function set_publishing_status( $publishing_status ) {
 		$this->container['publishing_status'] = $publishing_status;
+
+		return $this;
+	}
+
+	/**
+	 * Gets modified
+	 * @return \DateTime
+	 */
+	public function get_modified() {
+		return $this->container['modified'];
+	}
+
+	/**
+	 * Sets modified
+	 * @param \DateTime $modified Date when item was modified/created (UTC).
+	 * @return $this
+	 */
+	public function set_modified( $modified ) {
+		$this->container['modified'] = $modified;
 
 		return $this;
 	}

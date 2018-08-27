@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -91,7 +91,7 @@ class PTV_General_Description_Api {
 	 */
 	public function create_general_description_with_http_info( $request = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/GeneralDescription';
+		$resource_path = '/api/v7/GeneralDescription';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -128,7 +128,7 @@ class PTV_General_Description_Api {
 			$http_body,
 			$header_params,
 			'PTV_General_Description',
-			'/api/v5/GeneralDescription'
+			'/api/v7/GeneralDescription'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -169,7 +169,7 @@ class PTV_General_Description_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling get_general_description_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/GeneralDescription/{id}';
+		$resource_path = '/api/v7/GeneralDescription/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -209,7 +209,7 @@ class PTV_General_Description_Api {
 			$http_body,
 			$header_params,
 			'PTV_General_Description',
-			'/api/v5/GeneralDescription/{id}'
+			'/api/v7/GeneralDescription/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -248,7 +248,7 @@ class PTV_General_Description_Api {
 	 */
 	public function get_general_descriptions_with_http_info( $date = null, $page = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/GeneralDescription';
+		$resource_path = '/api/v7/GeneralDescription';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -280,7 +280,7 @@ class PTV_General_Description_Api {
 			$http_body,
 			$header_params,
 			'PTV_Guid_Page',
-			'/api/v5/GeneralDescription'
+			'/api/v7/GeneralDescription'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -293,37 +293,37 @@ class PTV_General_Description_Api {
 
 
 	/**
-	 * Operation update_general_description
+	 * Operation update_general_description_by_id
 	 *
 	 * Updates the defined general description with the data provided as input.
 	 *
-	 * @param string $id Service identifier (required)
+	 * @param string $id Statutory service general description identifier (required)
 	 * @param PTV_General_Description_In_Base $request The general description data. (optional)
 	 * WP_Error on non-2xx response
 	 * @return PTV_General_Description
 	 */
-	public function update_general_description( $id, $request = null ) {
-		list( $response ) = $this->update_general_description_with_http_info( $id, $request );
+	public function update_general_description_by_id( $id, $request = null ) {
+		list( $response ) = $this->update_general_description_by_id_with_http_info( $id, $request );
 		return $response;
 	}
 
 	/**
-	 * Operation update_general_description_with_http_info
+	 * Operation update_general_description_by_id_with_http_info
 	 *
 	 * Updates the defined general description with the data provided as input.
 	 *
-	 * @param string $id Service identifier (required)
+	 * @param string $id Statutory service general description identifier (required)
 	 * @param PTV_General_Description_In_Base $request The general description data. (optional)
 	 * WP_Error on non-2xx response
 	 * @return array of PTV_General_Description, HTTP status code, HTTP response headers (array of strings)
 	 */
-	public function update_general_description_with_http_info( $id, $request = null ) {
+	public function update_general_description_by_id_with_http_info( $id, $request = null ) {
 		// verify the required parameter 'id' is set
 		if ( null === $id ) {
-			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_general_description' );
+			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_general_description_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/GeneralDescription/{id}';
+		$resource_path = '/api/v7/GeneralDescription/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -368,7 +368,7 @@ class PTV_General_Description_Api {
 			$http_body,
 			$header_params,
 			'PTV_General_Description',
-			'/api/v5/GeneralDescription/{id}'
+			'/api/v7/GeneralDescription/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {

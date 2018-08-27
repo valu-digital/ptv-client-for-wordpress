@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Service_In_Base Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of service for IN api - base
+ * @description OPEN API V6 - View Model of service for IN api - base
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -41,6 +41,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'source_id' => 'string',
 		'statutory_service_general_description_id' => 'string',
 		'type' => 'string',
+		'funding_type' => 'string',
 		'service_names' => 'PTV_Localized_List_Item[]',
 		'service_charge_type' => 'string',
 		'area_type' => 'string',
@@ -55,12 +56,18 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'legislation' => 'PTV_Law[]',
 		'keywords' => 'PTV_Language_Item[]',
 		'requirements' => 'PTV_Language_Item[]',
-		'service_organizations' => 'PTV_Service_Organization[]',
+		'other_responsible_organizations' => 'string[]',
+		'service_producers' => 'PTV_Service_Producer_In[]',
+		'service_vouchers_in_use' => 'bool',
+		'service_vouchers' => 'PTV_Service_Voucher[]',
 		'publishing_status' => 'string',
 		'delete_all_life_events' => 'bool',
 		'delete_all_industrial_classes' => 'bool',
 		'delete_all_laws' => 'bool',
 		'delete_all_keywords' => 'bool',
+		'delete_service_charge_type' => 'bool',
+		'delete_statutory_service_general_description_id' => 'bool',
+		'main_responsible_organization' => 'string',
 	);
 
 	public static function types() {
@@ -75,6 +82,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'source_id' => 'sourceId',
 		'statutory_service_general_description_id' => 'statutoryServiceGeneralDescriptionId',
 		'type' => 'type',
+		'funding_type' => 'fundingType',
 		'service_names' => 'serviceNames',
 		'service_charge_type' => 'serviceChargeType',
 		'area_type' => 'areaType',
@@ -89,12 +97,18 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'legislation' => 'legislation',
 		'keywords' => 'keywords',
 		'requirements' => 'requirements',
-		'service_organizations' => 'serviceOrganizations',
+		'other_responsible_organizations' => 'otherResponsibleOrganizations',
+		'service_producers' => 'serviceProducers',
+		'service_vouchers_in_use' => 'serviceVouchersInUse',
+		'service_vouchers' => 'serviceVouchers',
 		'publishing_status' => 'publishingStatus',
 		'delete_all_life_events' => 'deleteAllLifeEvents',
 		'delete_all_industrial_classes' => 'deleteAllIndustrialClasses',
 		'delete_all_laws' => 'deleteAllLaws',
 		'delete_all_keywords' => 'deleteAllKeywords',
+		'delete_service_charge_type' => 'deleteServiceChargeType',
+		'delete_statutory_service_general_description_id' => 'deleteStatutoryServiceGeneralDescriptionId',
+		'main_responsible_organization' => 'mainResponsibleOrganization',
 	);
 
 
@@ -106,6 +120,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'source_id' => 'set_source_id',
 		'statutory_service_general_description_id' => 'set_statutory_service_general_description_id',
 		'type' => 'set_type',
+		'funding_type' => 'set_funding_type',
 		'service_names' => 'set_service_names',
 		'service_charge_type' => 'set_service_charge_type',
 		'area_type' => 'set_area_type',
@@ -120,12 +135,18 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'legislation' => 'set_legislation',
 		'keywords' => 'set_keywords',
 		'requirements' => 'set_requirements',
-		'service_organizations' => 'set_service_organizations',
+		'other_responsible_organizations' => 'set_other_responsible_organizations',
+		'service_producers' => 'set_service_producers',
+		'service_vouchers_in_use' => 'set_service_vouchers_in_use',
+		'service_vouchers' => 'set_service_vouchers',
 		'publishing_status' => 'set_publishing_status',
 		'delete_all_life_events' => 'set_delete_all_life_events',
 		'delete_all_industrial_classes' => 'set_delete_all_industrial_classes',
 		'delete_all_laws' => 'set_delete_all_laws',
 		'delete_all_keywords' => 'set_delete_all_keywords',
+		'delete_service_charge_type' => 'set_delete_service_charge_type',
+		'delete_statutory_service_general_description_id' => 'set_delete_statutory_service_general_description_id',
+		'main_responsible_organization' => 'set_main_responsible_organization',
 	);
 
 
@@ -137,6 +158,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'source_id' => 'get_source_id',
 		'statutory_service_general_description_id' => 'get_statutory_service_general_description_id',
 		'type' => 'get_type',
+		'funding_type' => 'get_funding_type',
 		'service_names' => 'get_service_names',
 		'service_charge_type' => 'get_service_charge_type',
 		'area_type' => 'get_area_type',
@@ -151,12 +173,18 @@ class PTV_Service_In_Base implements ArrayAccess {
 		'legislation' => 'get_legislation',
 		'keywords' => 'get_keywords',
 		'requirements' => 'get_requirements',
-		'service_organizations' => 'get_service_organizations',
+		'other_responsible_organizations' => 'get_other_responsible_organizations',
+		'service_producers' => 'get_service_producers',
+		'service_vouchers_in_use' => 'get_service_vouchers_in_use',
+		'service_vouchers' => 'get_service_vouchers',
 		'publishing_status' => 'get_publishing_status',
 		'delete_all_life_events' => 'get_delete_all_life_events',
 		'delete_all_industrial_classes' => 'get_delete_all_industrial_classes',
 		'delete_all_laws' => 'get_delete_all_laws',
 		'delete_all_keywords' => 'get_delete_all_keywords',
+		'delete_service_charge_type' => 'get_delete_service_charge_type',
+		'delete_statutory_service_general_description_id' => 'get_delete_statutory_service_general_description_id',
+		'main_responsible_organization' => 'get_main_responsible_organization',
 	);
 
 	public static function attribute_map() {
@@ -189,6 +217,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 		$this->container['source_id'] = isset( $data['source_id'] ) ? $data['source_id'] : null;
 		$this->container['statutory_service_general_description_id'] = isset( $data['statutory_service_general_description_id'] ) ? $data['statutory_service_general_description_id'] : null;
 		$this->container['type'] = isset( $data['type'] ) ? $data['type'] : null;
+		$this->container['funding_type'] = isset( $data['funding_type'] ) ? $data['funding_type'] : null;
 		$this->container['service_names'] = isset( $data['service_names'] ) ? $data['service_names'] : null;
 		$this->container['service_charge_type'] = isset( $data['service_charge_type'] ) ? $data['service_charge_type'] : null;
 		$this->container['area_type'] = isset( $data['area_type'] ) ? $data['area_type'] : null;
@@ -203,12 +232,18 @@ class PTV_Service_In_Base implements ArrayAccess {
 		$this->container['legislation'] = isset( $data['legislation'] ) ? $data['legislation'] : null;
 		$this->container['keywords'] = isset( $data['keywords'] ) ? $data['keywords'] : null;
 		$this->container['requirements'] = isset( $data['requirements'] ) ? $data['requirements'] : null;
-		$this->container['service_organizations'] = isset( $data['service_organizations'] ) ? $data['service_organizations'] : null;
+		$this->container['other_responsible_organizations'] = isset( $data['other_responsible_organizations'] ) ? $data['other_responsible_organizations'] : null;
+		$this->container['service_producers'] = isset( $data['service_producers'] ) ? $data['service_producers'] : null;
+		$this->container['service_vouchers_in_use'] = isset( $data['service_vouchers_in_use'] ) ? $data['service_vouchers_in_use'] : null;
+		$this->container['service_vouchers'] = isset( $data['service_vouchers'] ) ? $data['service_vouchers'] : null;
 		$this->container['publishing_status'] = isset( $data['publishing_status'] ) ? $data['publishing_status'] : null;
 		$this->container['delete_all_life_events'] = isset( $data['delete_all_life_events'] ) ? $data['delete_all_life_events'] : null;
 		$this->container['delete_all_industrial_classes'] = isset( $data['delete_all_industrial_classes'] ) ? $data['delete_all_industrial_classes'] : null;
 		$this->container['delete_all_laws'] = isset( $data['delete_all_laws'] ) ? $data['delete_all_laws'] : null;
 		$this->container['delete_all_keywords'] = isset( $data['delete_all_keywords'] ) ? $data['delete_all_keywords'] : null;
+		$this->container['delete_service_charge_type'] = isset( $data['delete_service_charge_type'] ) ? $data['delete_service_charge_type'] : null;
+		$this->container['delete_statutory_service_general_description_id'] = isset( $data['delete_statutory_service_general_description_id'] ) ? $data['delete_statutory_service_general_description_id'] : null;
+		$this->container['main_responsible_organization'] = isset( $data['main_responsible_organization'] ) ? $data['main_responsible_organization'] : null;
 	}
 
 	/**
@@ -223,6 +258,9 @@ class PTV_Service_In_Base implements ArrayAccess {
 			$invalid_properties[] = "invalid value for 'source_id', must be conform to the pattern /^[A-Za-z0-9-.]*$/.";
 		}
 
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -235,6 +273,9 @@ class PTV_Service_In_Base implements ArrayAccess {
 	public function valid() {
 
 		if ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			return false;
+		}
+		if ( null === $this->container['publishing_status'] ) {
 			return false;
 		}
 		return true;
@@ -251,7 +292,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets source_id
-	 * @param string $source_id External system identifier for the entity.
+	 * @param string $source_id External system identifier for the entity. User needs to be logged in to be able to get/set value.
 	 * @return $this
 	 */
 	public function set_source_id( $source_id ) {
@@ -294,11 +335,30 @@ class PTV_Service_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets type
-	 * @param string $type Service type. Possible values are: Service or PermissionAndObligation.  NOTE! If service type has been defined within attached statutory service general description, the type for service is ignored.
+	 * @param string $type Service type. Possible values are: Service, PermissionAndObligation or ProfessionalQualifications.  NOTE! If service type has been defined within attached statutory service general description, the type for service is ignored.
 	 * @return $this
 	 */
 	public function set_type( $type ) {
 		$this->container['type'] = $type;
+
+		return $this;
+	}
+
+	/**
+	 * Gets funding_type
+	 * @return string
+	 */
+	public function get_funding_type() {
+		return $this->container['funding_type'];
+	}
+
+	/**
+	 * Sets funding_type
+	 * @param string $funding_type Service funding type. Possible values are: PubliclyFunded or MarketFunded.
+	 * @return $this
+	 */
+	public function set_funding_type( $funding_type ) {
+		$this->container['funding_type'] = $funding_type;
 
 		return $this;
 	}
@@ -332,7 +392,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets service_charge_type
-	 * @param string $service_charge_type Service charge type. Possible values are: Charged, Free or Other.  NOTE! If service charge type has been defined within attached statutory service general description, the charge type for service is ignored.
+	 * @param string $service_charge_type Service charge type. Possible values are: Charged or Free.  NOTE! If service charge type has been defined within attached statutory service general description, the charge type for service is ignored.
 	 * @return $this
 	 */
 	public function set_service_charge_type( $service_charge_type ) {
@@ -541,7 +601,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets keywords
-	 * @param PTV_Language_Item[] $keywords List of localized service keywords.
+	 * @param PTV_Language_Item[] $keywords List of localized service keywords. (Max.Length: 150).
 	 * @return $this
 	 */
 	public function set_keywords( $keywords ) {
@@ -570,20 +630,77 @@ class PTV_Service_In_Base implements ArrayAccess {
 	}
 
 	/**
-	 * Gets service_organizations
-	 * @return PTV_Service_Organization[]
+	 * Gets other_responsible_organizations
+	 * @return string[]
 	 */
-	public function get_service_organizations() {
-		return $this->container['service_organizations'];
+	public function get_other_responsible_organizations() {
+		return $this->container['other_responsible_organizations'];
 	}
 
 	/**
-	 * Sets service_organizations
-	 * @param PTV_Service_Organization[] $service_organizations List of organizations responsible or producing the service.
+	 * Sets other_responsible_organizations
+	 * @param string[] $other_responsible_organizations List of other responsible organizations for the service.
 	 * @return $this
 	 */
-	public function set_service_organizations( $service_organizations ) {
-		$this->container['service_organizations'] = $service_organizations;
+	public function set_other_responsible_organizations( $other_responsible_organizations ) {
+		$this->container['other_responsible_organizations'] = $other_responsible_organizations;
+
+		return $this;
+	}
+
+	/**
+	 * Gets service_producers
+	 * @return PTV_Service_Producer_In[]
+	 */
+	public function get_service_producers() {
+		return $this->container['service_producers'];
+	}
+
+	/**
+	 * Sets service_producers
+	 * @param PTV_Service_Producer_In[] $service_producers List of service producers
+	 * @return $this
+	 */
+	public function set_service_producers( $service_producers ) {
+		$this->container['service_producers'] = $service_producers;
+
+		return $this;
+	}
+
+	/**
+	 * Gets service_vouchers_in_use
+	 * @return bool
+	 */
+	public function get_service_vouchers_in_use() {
+		return $this->container['service_vouchers_in_use'];
+	}
+
+	/**
+	 * Sets service_vouchers_in_use
+	 * @param bool $service_vouchers_in_use Indicates if service vouchers are used in the service.
+	 * @return $this
+	 */
+	public function set_service_vouchers_in_use( $service_vouchers_in_use ) {
+		$this->container['service_vouchers_in_use'] = $service_vouchers_in_use;
+
+		return $this;
+	}
+
+	/**
+	 * Gets service_vouchers
+	 * @return PTV_Service_Voucher[]
+	 */
+	public function get_service_vouchers() {
+		return $this->container['service_vouchers'];
+	}
+
+	/**
+	 * Sets service_vouchers
+	 * @param PTV_Service_Voucher[] $service_vouchers List of service vouchers.
+	 * @return $this
+	 */
+	public function set_service_vouchers( $service_vouchers ) {
+		$this->container['service_vouchers'] = $service_vouchers;
 
 		return $this;
 	}
@@ -598,7 +715,7 @@ class PTV_Service_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets publishing_status
-	 * @param string $publishing_status Service channel publishing status. Values: Draft, Published, Deleted or Modified.
+	 * @param string $publishing_status Publishing status. Possible values are: Draft, Published, Deleted or Modified.
 	 * @return $this
 	 */
 	public function set_publishing_status( $publishing_status ) {
@@ -679,6 +796,63 @@ class PTV_Service_In_Base implements ArrayAccess {
 	 */
 	public function set_delete_all_keywords( $delete_all_keywords ) {
 		$this->container['delete_all_keywords'] = $delete_all_keywords;
+
+		return $this;
+	}
+
+	/**
+	 * Gets delete_service_charge_type
+	 * @return bool
+	 */
+	public function get_delete_service_charge_type() {
+		return $this->container['delete_service_charge_type'];
+	}
+
+	/**
+	 * Sets delete_service_charge_type
+	 * @param bool $delete_service_charge_type Set to true to delete service charge type (ServiceChargeType property for this object should be empty when this option is used).
+	 * @return $this
+	 */
+	public function set_delete_service_charge_type( $delete_service_charge_type ) {
+		$this->container['delete_service_charge_type'] = $delete_service_charge_type;
+
+		return $this;
+	}
+
+	/**
+	 * Gets delete_statutory_service_general_description_id
+	 * @return bool
+	 */
+	public function get_delete_statutory_service_general_description_id() {
+		return $this->container['delete_statutory_service_general_description_id'];
+	}
+
+	/**
+	 * Sets delete_statutory_service_general_description_id
+	 * @param bool $delete_statutory_service_general_description_id Set to true to delete statutory service general description (StatutoryServiceGeneralDescriptionId property for this object should be empty when this option is used).
+	 * @return $this
+	 */
+	public function set_delete_statutory_service_general_description_id( $delete_statutory_service_general_description_id ) {
+		$this->container['delete_statutory_service_general_description_id'] = $delete_statutory_service_general_description_id;
+
+		return $this;
+	}
+
+	/**
+	 * Gets main_responsible_organization
+	 * @return string
+	 */
+	public function get_main_responsible_organization() {
+		return $this->container['main_responsible_organization'];
+	}
+
+	/**
+	 * Sets main_responsible_organization
+	 * @param string $main_responsible_organization Main responsible organization Id
+	 * @return $this
+	 */
+	public function set_main_responsible_organization( $main_responsible_organization ) {
+		$this->container['main_responsible_organization'] = $main_responsible_organization;
 
 		return $this;
 	}

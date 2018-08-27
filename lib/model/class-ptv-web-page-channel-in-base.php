@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Web_Page_Channel_In_Base Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of web page channel for IN api - base
+ * @description OPEN API V6 - View Model of web page channel for IN api - base
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -168,6 +168,9 @@ class PTV_Web_Page_Channel_In_Base implements ArrayAccess {
 			$invalid_properties[] = "invalid value for 'source_id', must be conform to the pattern /^[A-Za-z0-9-.]*$/.";
 		}
 
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -180,6 +183,9 @@ class PTV_Web_Page_Channel_In_Base implements ArrayAccess {
 	public function valid() {
 
 		if ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			return false;
+		}
+		if ( null === $this->container['publishing_status'] ) {
 			return false;
 		}
 		return true;
@@ -196,7 +202,7 @@ class PTV_Web_Page_Channel_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets source_id
-	 * @param string $source_id External system identifier for this service channel.
+	 * @param string $source_id External system identifier for this service channel. User needs to be logged in to be able to get/set value.
 	 * @return $this
 	 */
 	public function set_source_id( $source_id ) {

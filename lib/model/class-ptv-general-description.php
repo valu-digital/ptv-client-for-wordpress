@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_General_Description Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V4 - View Model of general description
+ * @description OPEN API V7 - View Model of general description
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -42,7 +42,7 @@ class PTV_General_Description implements ArrayAccess {
 		'names' => 'PTV_Localized_List_Item[]',
 		'descriptions' => 'PTV_Localized_List_Item[]',
 		'languages' => 'string[]',
-		'service_classes' => 'PTV_Finto_Item[]',
+		'service_classes' => 'PTV_Finto_Item_With_Description[]',
 		'ontology_terms' => 'PTV_Finto_Item[]',
 		'target_groups' => 'PTV_Finto_Item[]',
 		'life_events' => 'PTV_Finto_Item[]',
@@ -52,6 +52,8 @@ class PTV_General_Description implements ArrayAccess {
 		'service_charge_type' => 'string',
 		'legislation' => 'PTV_Law[]',
 		'publishing_status' => 'string',
+		'modified' => '\DateTime',
+		'service_channels' => 'PTV_Service_Service_Channel[]',
 	);
 
 	public static function types() {
@@ -77,6 +79,8 @@ class PTV_General_Description implements ArrayAccess {
 		'service_charge_type' => 'serviceChargeType',
 		'legislation' => 'legislation',
 		'publishing_status' => 'publishingStatus',
+		'modified' => 'modified',
+		'service_channels' => 'serviceChannels',
 	);
 
 
@@ -99,6 +103,8 @@ class PTV_General_Description implements ArrayAccess {
 		'service_charge_type' => 'set_service_charge_type',
 		'legislation' => 'set_legislation',
 		'publishing_status' => 'set_publishing_status',
+		'modified' => 'set_modified',
+		'service_channels' => 'set_service_channels',
 	);
 
 
@@ -121,6 +127,8 @@ class PTV_General_Description implements ArrayAccess {
 		'service_charge_type' => 'get_service_charge_type',
 		'legislation' => 'get_legislation',
 		'publishing_status' => 'get_publishing_status',
+		'modified' => 'get_modified',
+		'service_channels' => 'get_service_channels',
 	);
 
 	public static function attribute_map() {
@@ -164,6 +172,8 @@ class PTV_General_Description implements ArrayAccess {
 		$this->container['service_charge_type'] = isset( $data['service_charge_type'] ) ? $data['service_charge_type'] : null;
 		$this->container['legislation'] = isset( $data['legislation'] ) ? $data['legislation'] : null;
 		$this->container['publishing_status'] = isset( $data['publishing_status'] ) ? $data['publishing_status'] : null;
+		$this->container['modified'] = isset( $data['modified'] ) ? $data['modified'] : null;
+		$this->container['service_channels'] = isset( $data['service_channels'] ) ? $data['service_channels'] : null;
 	}
 
 	/**
@@ -174,6 +184,9 @@ class PTV_General_Description implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -185,6 +198,9 @@ class PTV_General_Description implements ArrayAccess {
 	 */
 	public function valid() {
 
+		if ( null === $this->container['publishing_status'] ) {
+			return false;
+		}
 		return true;
 	}
 
@@ -267,7 +283,7 @@ class PTV_General_Description implements ArrayAccess {
 
 	/**
 	 * Gets service_classes
-	 * @return PTV_Finto_Item[]
+	 * @return PTV_Finto_Item_With_Description[]
 	 */
 	public function get_service_classes() {
 		return $this->container['service_classes'];
@@ -275,7 +291,7 @@ class PTV_General_Description implements ArrayAccess {
 
 	/**
 	 * Sets service_classes
-	 * @param PTV_Finto_Item[] $service_classes List of service classes.
+	 * @param PTV_Finto_Item_With_Description[] $service_classes List of service classes.
 	 * @return $this
 	 */
 	public function set_service_classes( $service_classes ) {
@@ -451,6 +467,44 @@ class PTV_General_Description implements ArrayAccess {
 	 */
 	public function set_publishing_status( $publishing_status ) {
 		$this->container['publishing_status'] = $publishing_status;
+
+		return $this;
+	}
+
+	/**
+	 * Gets modified
+	 * @return \DateTime
+	 */
+	public function get_modified() {
+		return $this->container['modified'];
+	}
+
+	/**
+	 * Sets modified
+	 * @param \DateTime $modified Date when item was modified/created (UTC).
+	 * @return $this
+	 */
+	public function set_modified( $modified ) {
+		$this->container['modified'] = $modified;
+
+		return $this;
+	}
+
+	/**
+	 * Gets service_channels
+	 * @return PTV_Service_Service_Channel[]
+	 */
+	public function get_service_channels() {
+		return $this->container['service_channels'];
+	}
+
+	/**
+	 * Sets service_channels
+	 * @param PTV_Service_Service_Channel[] $service_channels List of linked service channels including relationship data.
+	 * @return $this
+	 */
+	public function set_service_channels( $service_channels ) {
+		$this->container['service_channels'] = $service_channels;
 
 		return $this;
 	}

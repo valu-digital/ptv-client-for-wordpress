@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**day_from** | **string** | Starts from weekday (e.g. Monday). | 
+**day_from** | **string** | Starts from weekday (e.g. Monday). | [optional] 
 **day_to** | **string** | Ends to weekday (e.g. Monday). | [optional] 
 **from** | **string** | Start time for example 10:00. | 
 **to** | **string** | End time for example 20:00. | 

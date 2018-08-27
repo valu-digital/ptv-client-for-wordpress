@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Service_Service_Channel Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V4 - View Model of service and service channel connection
+ * @description OPEN API V6 - View Model of service channel
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -38,9 +38,9 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	  * @var string[]
 	  */
 	protected static $types = array(
-		'service_channel_id' => 'string',
-		'description' => 'PTV_Localized_List_Item[]',
+		'service_channel' => 'PTV_Item',
 		'service_charge_type' => 'string',
+		'description' => 'PTV_Localized_List_Item[]',
 		'digital_authorizations' => 'PTV_Finto_Item[]',
 	);
 
@@ -53,9 +53,9 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $attribute_map = array(
-		'service_channel_id' => 'serviceChannelId',
-		'description' => 'description',
+		'service_channel' => 'serviceChannel',
 		'service_charge_type' => 'serviceChargeType',
+		'description' => 'description',
 		'digital_authorizations' => 'digitalAuthorizations',
 	);
 
@@ -65,9 +65,9 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $setters = array(
-		'service_channel_id' => 'set_service_channel_id',
-		'description' => 'set_description',
+		'service_channel' => 'set_service_channel',
 		'service_charge_type' => 'set_service_charge_type',
+		'description' => 'set_description',
 		'digital_authorizations' => 'set_digital_authorizations',
 	);
 
@@ -77,9 +77,9 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $getters = array(
-		'service_channel_id' => 'get_service_channel_id',
-		'description' => 'get_description',
+		'service_channel' => 'get_service_channel',
 		'service_charge_type' => 'get_service_charge_type',
+		'description' => 'get_description',
 		'digital_authorizations' => 'get_digital_authorizations',
 	);
 
@@ -110,9 +110,9 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	 * @param mixed[] $data Associated array of property values initializing the model
 	 */
 	public function __construct( array $data = null ) {
-		$this->container['service_channel_id'] = isset( $data['service_channel_id'] ) ? $data['service_channel_id'] : null;
-		$this->container['description'] = isset( $data['description'] ) ? $data['description'] : null;
+		$this->container['service_channel'] = isset( $data['service_channel'] ) ? $data['service_channel'] : null;
 		$this->container['service_charge_type'] = isset( $data['service_charge_type'] ) ? $data['service_charge_type'] : null;
+		$this->container['description'] = isset( $data['description'] ) ? $data['description'] : null;
 		$this->container['digital_authorizations'] = isset( $data['digital_authorizations'] ) ? $data['digital_authorizations'] : null;
 	}
 
@@ -124,9 +124,6 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
-		if ( null === $this->container['service_channel_id'] ) {
-			$invalid_properties[] = "'service_channel_id' can't be null";
-		}
 		return $invalid_properties;
 	}
 
@@ -138,47 +135,25 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	 */
 	public function valid() {
 
-		if ( null === $this->container['service_channel_id'] ) {
-			return false;
-		}
 		return true;
 	}
 
 
 	/**
-	 * Gets service_channel_id
-	 * @return string
+	 * Gets service_channel
+	 * @return PTV_Item
 	 */
-	public function get_service_channel_id() {
-		return $this->container['service_channel_id'];
+	public function get_service_channel() {
+		return $this->container['service_channel'];
 	}
 
 	/**
-	 * Sets service_channel_id
-	 * @param string $service_channel_id PTV service channel identifier.
+	 * Sets service_channel
+	 * @param PTV_Item $service_channel Service channel identifier and name.
 	 * @return $this
 	 */
-	public function set_service_channel_id( $service_channel_id ) {
-		$this->container['service_channel_id'] = $service_channel_id;
-
-		return $this;
-	}
-
-	/**
-	 * Gets description
-	 * @return PTV_Localized_List_Item[]
-	 */
-	public function get_description() {
-		return $this->container['description'];
-	}
-
-	/**
-	 * Sets description
-	 * @param PTV_Localized_List_Item[] $description List of localized service channel relationship descriptions.
-	 * @return $this
-	 */
-	public function set_description( $description ) {
-		$this->container['description'] = $description;
+	public function set_service_channel( $service_channel ) {
+		$this->container['service_channel'] = $service_channel;
 
 		return $this;
 	}
@@ -198,6 +173,25 @@ class PTV_Service_Service_Channel implements ArrayAccess {
 	 */
 	public function set_service_charge_type( $service_charge_type ) {
 		$this->container['service_charge_type'] = $service_charge_type;
+
+		return $this;
+	}
+
+	/**
+	 * Gets description
+	 * @return PTV_Localized_List_Item[]
+	 */
+	public function get_description() {
+		return $this->container['description'];
+	}
+
+	/**
+	 * Sets description
+	 * @param PTV_Localized_List_Item[] $description List of localized service channel relationship descriptions.
+	 * @return $this
+	 */
+	public function set_description( $description ) {
+		$this->container['description'] = $description;
 
 		return $this;
 	}

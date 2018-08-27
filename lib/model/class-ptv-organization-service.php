@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -203,7 +203,7 @@ class PTV_Organization_Service implements ArrayAccess {
 
 	/**
 	 * Sets role_type
-	 * @param string $role_type Role type, valid values Responsible or Producer.
+	 * @param string $role_type Role type, valid values Responsible or Producer. In version 7 and upper also OtherResponsible role type is used.
 	 * @return $this
 	 */
 	public function set_role_type( $role_type ) {

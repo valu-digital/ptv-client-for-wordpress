@@ -1,6 +1,6 @@
 <?php
 /**
- * PTV_Service_And_Channel
+ * PTV_Service_And_Channel_In
  *
  * PHP version 5
  *
@@ -12,26 +12,26 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
 
 /**
- * PTV_Service_And_Channel Class Doc Comment
+ * PTV_Service_And_Channel_In Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V2 - View Model of service and channel relation
+ * @description OPEN API V7 - View Model of service and channel relation
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
-class PTV_Service_And_Channel implements ArrayAccess {
+class PTV_Service_And_Channel_In implements ArrayAccess {
 
 	/**
 	  * The original name of the model.
 	  * @var string
 	  */
-	protected static $model_name = 'PTV_Service_And_Channel';
+	protected static $model_name = 'PTV_Service_And_Channel_In';
 
 	/**
 	  * Array of property to type mappings. Used for (de)serialization
@@ -40,8 +40,10 @@ class PTV_Service_And_Channel implements ArrayAccess {
 	protected static $types = array(
 		'service_id' => 'string',
 		'service_channel_id' => 'string',
-		'description' => 'PTV_Localized_List_Item[]',
 		'service_charge_type' => 'string',
+		'description' => 'PTV_Localized_List_Item[]',
+		'service_hours' => 'PTV_Service_Hour[]',
+		'contact_details' => 'PTV_Contact_Details_In',
 	);
 
 	public static function types() {
@@ -55,8 +57,10 @@ class PTV_Service_And_Channel implements ArrayAccess {
 	protected static $attribute_map = array(
 		'service_id' => 'serviceId',
 		'service_channel_id' => 'serviceChannelId',
-		'description' => 'description',
 		'service_charge_type' => 'serviceChargeType',
+		'description' => 'description',
+		'service_hours' => 'serviceHours',
+		'contact_details' => 'contactDetails',
 	);
 
 
@@ -67,8 +71,10 @@ class PTV_Service_And_Channel implements ArrayAccess {
 	protected static $setters = array(
 		'service_id' => 'set_service_id',
 		'service_channel_id' => 'set_service_channel_id',
-		'description' => 'set_description',
 		'service_charge_type' => 'set_service_charge_type',
+		'description' => 'set_description',
+		'service_hours' => 'set_service_hours',
+		'contact_details' => 'set_contact_details',
 	);
 
 
@@ -79,8 +85,10 @@ class PTV_Service_And_Channel implements ArrayAccess {
 	protected static $getters = array(
 		'service_id' => 'get_service_id',
 		'service_channel_id' => 'get_service_channel_id',
-		'description' => 'get_description',
 		'service_charge_type' => 'get_service_charge_type',
+		'description' => 'get_description',
+		'service_hours' => 'get_service_hours',
+		'contact_details' => 'get_contact_details',
 	);
 
 	public static function attribute_map() {
@@ -112,8 +120,10 @@ class PTV_Service_And_Channel implements ArrayAccess {
 	public function __construct( array $data = null ) {
 		$this->container['service_id'] = isset( $data['service_id'] ) ? $data['service_id'] : null;
 		$this->container['service_channel_id'] = isset( $data['service_channel_id'] ) ? $data['service_channel_id'] : null;
-		$this->container['description'] = isset( $data['description'] ) ? $data['description'] : null;
 		$this->container['service_charge_type'] = isset( $data['service_charge_type'] ) ? $data['service_charge_type'] : null;
+		$this->container['description'] = isset( $data['description'] ) ? $data['description'] : null;
+		$this->container['service_hours'] = isset( $data['service_hours'] ) ? $data['service_hours'] : null;
+		$this->container['contact_details'] = isset( $data['contact_details'] ) ? $data['contact_details'] : null;
 	}
 
 	/**
@@ -161,7 +171,7 @@ class PTV_Service_And_Channel implements ArrayAccess {
 
 	/**
 	 * Sets service_id
-	 * @param string $service_id PTV service channel identifier.
+	 * @param string $service_id PTV service identifier.
 	 * @return $this
 	 */
 	public function set_service_id( $service_id ) {
@@ -190,6 +200,25 @@ class PTV_Service_And_Channel implements ArrayAccess {
 	}
 
 	/**
+	 * Gets service_charge_type
+	 * @return string
+	 */
+	public function get_service_charge_type() {
+		return $this->container['service_charge_type'];
+	}
+
+	/**
+	 * Sets service_charge_type
+	 * @param string $service_charge_type Service charge type. Possible values are: Charged, Free or Other
+	 * @return $this
+	 */
+	public function set_service_charge_type( $service_charge_type ) {
+		$this->container['service_charge_type'] = $service_charge_type;
+
+		return $this;
+	}
+
+	/**
 	 * Gets description
 	 * @return PTV_Localized_List_Item[]
 	 */
@@ -209,20 +238,39 @@ class PTV_Service_And_Channel implements ArrayAccess {
 	}
 
 	/**
-	 * Gets service_charge_type
-	 * @return string
+	 * Gets service_hours
+	 * @return PTV_Service_Hour[]
 	 */
-	public function get_service_charge_type() {
-		return $this->container['service_charge_type'];
+	public function get_service_hours() {
+		return $this->container['service_hours'];
 	}
 
 	/**
-	 * Sets service_charge_type
-	 * @param string $service_charge_type Service charge type. Possible values are: Charged, Free or Other
+	 * Sets service_hours
+	 * @param PTV_Service_Hour[] $service_hours List of connection related service hours.
 	 * @return $this
 	 */
-	public function set_service_charge_type( $service_charge_type ) {
-		$this->container['service_charge_type'] = $service_charge_type;
+	public function set_service_hours( $service_hours ) {
+		$this->container['service_hours'] = $service_hours;
+
+		return $this;
+	}
+
+	/**
+	 * Gets contact_details
+	 * @return PTV_Contact_Details_In
+	 */
+	public function get_contact_details() {
+		return $this->container['contact_details'];
+	}
+
+	/**
+	 * Sets contact_details
+	 * @param PTV_Contact_Details_In $contact_details List of connection related contact details.
+	 * @return $this
+	 */
+	public function set_contact_details( $contact_details ) {
+		$this->container['contact_details'] = $contact_details;
 
 		return $this;
 	}

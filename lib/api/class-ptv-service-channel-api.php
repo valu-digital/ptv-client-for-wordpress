@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -91,7 +91,7 @@ class PTV_Service_Channel_Api {
 	 */
 	public function create_echannel_with_http_info( $request = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/EChannel';
+		$resource_path = '/api/v7/ServiceChannel/EChannel';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -128,7 +128,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_EChannel_Channel',
-			'/api/v5/ServiceChannel/EChannel'
+			'/api/v7/ServiceChannel/EChannel'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -165,7 +165,7 @@ class PTV_Service_Channel_Api {
 	 */
 	public function create_phone_with_http_info( $request = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/Phone';
+		$resource_path = '/api/v7/ServiceChannel/Phone';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -202,7 +202,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Phone_Channel',
-			'/api/v5/ServiceChannel/Phone'
+			'/api/v7/ServiceChannel/Phone'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -239,7 +239,7 @@ class PTV_Service_Channel_Api {
 	 */
 	public function create_printable_form_with_http_info( $request = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/PrintableForm';
+		$resource_path = '/api/v7/ServiceChannel/PrintableForm';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -276,7 +276,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Printable_Form_Channel',
-			'/api/v5/ServiceChannel/PrintableForm'
+			'/api/v7/ServiceChannel/PrintableForm'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -313,7 +313,7 @@ class PTV_Service_Channel_Api {
 	 */
 	public function create_service_location_with_http_info( $request = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/ServiceLocation';
+		$resource_path = '/api/v7/ServiceChannel/ServiceLocation';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -350,7 +350,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Service_Location_Channel',
-			'/api/v5/ServiceChannel/ServiceLocation'
+			'/api/v7/ServiceChannel/ServiceLocation'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -387,7 +387,7 @@ class PTV_Service_Channel_Api {
 	 */
 	public function create_webpage_with_http_info( $request = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/WebPage';
+		$resource_path = '/api/v7/ServiceChannel/WebPage';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -424,7 +424,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Web_Page_Channel',
-			'/api/v5/ServiceChannel/WebPage'
+			'/api/v7/ServiceChannel/WebPage'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -437,35 +437,35 @@ class PTV_Service_Channel_Api {
 
 
 	/**
-	 * Operation get_service_channel_by_id
+	 * Operation get_active_service_channel_by_id
 	 *
-	 * Fetches all the information related to a single service channel.
+	 * Fetches all the information related to a single service channel. Also service channels with only draft or modified versions are returned.  NOTE! This is a restricted endpoint.
 	 *
 	 * @param string $id Guid (required)
 	 * WP_Error on non-2xx response
 	 * @return PTV_Service_Channels
 	 */
-	public function get_service_channel_by_id( $id ) {
-		list( $response ) = $this->get_service_channel_by_id_with_http_info( $id );
+	public function get_active_service_channel_by_id( $id ) {
+		list( $response ) = $this->get_active_service_channel_by_id_with_http_info( $id );
 		return $response;
 	}
 
 	/**
-	 * Operation get_service_channel_by_id_with_http_info
+	 * Operation get_active_service_channel_by_id_with_http_info
 	 *
-	 * Fetches all the information related to a single service channel.
+	 * Fetches all the information related to a single service channel. Also service channels with only draft or modified versions are returned.  NOTE! This is a restricted endpoint.
 	 *
 	 * @param string $id Guid (required)
 	 * WP_Error on non-2xx response
 	 * @return array of PTV_Service_Channels, HTTP status code, HTTP response headers (array of strings)
 	 */
-	public function get_service_channel_by_id_with_http_info( $id ) {
+	public function get_active_service_channel_by_id_with_http_info( $id ) {
 		// verify the required parameter 'id' is set
 		if ( null === $id ) {
-			throw new InvalidArgumentException( 'Missing the required parameter $id when calling get_service_channel_by_id' );
+			throw new InvalidArgumentException( 'Missing the required parameter $id when calling get_active_service_channel_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/{id}';
+		$resource_path = '/api/v7/ServiceChannel/active/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -505,7 +505,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Service_Channels',
-			'/api/v5/ServiceChannel/{id}'
+			'/api/v7/ServiceChannel/active/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -518,116 +518,35 @@ class PTV_Service_Channel_Api {
 
 
 	/**
-	 * Operation get_service_channel_by_type
+	 * Operation get_active_service_channels
 	 *
-	 * Gets a list of certain type of published service channels.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
-	 *
-	 * @param string $type Service channel type (required)
-	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
-	 * WP_Error on non-2xx response
-	 * @return PTV_Service_Channels[]
-	 */
-	public function get_service_channel_by_type( $type, $date = null ) {
-		list( $response ) = $this->get_service_channel_by_type_with_http_info( $type, $date );
-		return $response;
-	}
-
-	/**
-	 * Operation get_service_channel_by_type_with_http_info
-	 *
-	 * Gets a list of certain type of published service channels.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
-	 *
-	 * @param string $type Service channel type (required)
-	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
-	 * WP_Error on non-2xx response
-	 * @return array of PTV_Service_Channels[], HTTP status code, HTTP response headers (array of strings)
-	 */
-	public function get_service_channel_by_type_with_http_info( $type, $date = null ) {
-		// verify the required parameter 'type' is set
-		if ( null === $type ) {
-			throw new InvalidArgumentException( 'Missing the required parameter $type when calling get_service_channel_by_type' );
-		}
-		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/type/{type}';
-		$http_body = '';
-		$query_params = array();
-		$header_params = array();
-		$form_params = array();
-		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
-		if ( ! is_null( $_header_accept ) ) {
-			$header_params['Accept'] = $_header_accept;
-		}
-		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
-
-		// path params
-		if ( null !== $type ) {
-			$resource_path = str_replace(
-				"{" . "type" . "}",
-				$this->api_client->get_serializer()->to_path_value( $type ),
-				$resource_path
-			);
-		}
-		
-		// for model (json/xml)
-		if ( isset( $temp_body ) ) {
-			$http_body = $temp_body; // $temp_body is the method argument, if present
-		} elseif ( count( $form_params ) > 0 ) {
-			$http_body = $form_params; // for HTTP post (form)
-		}
-
-		// this endpoint requires OAuth (access token)
-		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
-			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
-		}
-
-		// make the API Call
-		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
-			$resource_path,
-			'GET',
-			$query_params,
-			$http_body,
-			$header_params,
-			'PTV_Service_Channels[]',
-			'/api/v5/ServiceChannel/type/{type}'
-		);
-
-		if ( is_wp_error( $response ) ) {
-			$response = array( $response, $status_code, $http_header );
-			return $response;
-		}
-
-		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Service_Channels[]', $http_header ), $status_code, $http_header );
-	}
-
-
-	/**
-	 * Operation get_service_channels
-	 *
-	 * Gets all published service channels within PTV as a list of service channel ids and names.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 * Gets all service channels within PTV as a list of service channel ids and names. Also service channels with draft and modified versions are included.   Service channels created/modified after certain date can be fetched by adding date as query string parameter.  Certain type of service channels can be fetched by setting query string parameter type.  NOTE! This is a restricted endpoint.
 	 *
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param string $type Service channel type (optional)
 	 * @param int $page The page to be fetched. (optional)
 	 * WP_Error on non-2xx response
 	 * @return PTV_Guid_Page
 	 */
-	public function get_service_channels( $date = null, $page = null ) {
-		list( $response ) = $this->get_service_channels_with_http_info( $date, $page );
+	public function get_active_service_channels( $date = null, $type = null, $page = null ) {
+		list( $response ) = $this->get_active_service_channels_with_http_info( $date, $type, $page );
 		return $response;
 	}
 
 	/**
-	 * Operation get_service_channels_with_http_info
+	 * Operation get_active_service_channels_with_http_info
 	 *
-	 * Gets all published service channels within PTV as a list of service channel ids and names.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 * Gets all service channels within PTV as a list of service channel ids and names. Also service channels with draft and modified versions are included.   Service channels created/modified after certain date can be fetched by adding date as query string parameter.  Certain type of service channels can be fetched by setting query string parameter type.  NOTE! This is a restricted endpoint.
 	 *
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param string $type Service channel type (optional)
 	 * @param int $page The page to be fetched. (optional)
 	 * WP_Error on non-2xx response
 	 * @return array of PTV_Guid_Page, HTTP status code, HTTP response headers (array of strings)
 	 */
-	public function get_service_channels_with_http_info( $date = null, $page = null ) {
+	public function get_active_service_channels_with_http_info( $date = null, $type = null, $page = null ) {
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel';
+		$resource_path = '/api/v7/ServiceChannel/active';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -659,7 +578,331 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Guid_Page',
-			'/api/v5/ServiceChannel'
+			'/api/v7/ServiceChannel/active'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Guid_Page', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
+	 * Operation get_municipality_by_code
+	 *
+	 * Gets a list of service channels related to defined municipality.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 *
+	 * @param string $code Municipality code (required)
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Guid_Page
+	 */
+	public function get_municipality_by_code( $code, $date = null, $page = null ) {
+		list( $response ) = $this->get_municipality_by_code_with_http_info( $code, $date, $page );
+		return $response;
+	}
+
+	/**
+	 * Operation get_municipality_by_code_with_http_info
+	 *
+	 * Gets a list of service channels related to defined municipality.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 *
+	 * @param string $code Municipality code (required)
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Guid_Page, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function get_municipality_by_code_with_http_info( $code, $date = null, $page = null ) {
+		// verify the required parameter 'code' is set
+		if ( null === $code ) {
+			throw new InvalidArgumentException( 'Missing the required parameter $code when calling get_municipality_by_code' );
+		}
+		// parse inputs
+		$resource_path = '/api/v7/ServiceChannel/municipality/{code}';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
+
+		// path params
+		if ( null !== $code ) {
+			$resource_path = str_replace(
+				"{" . "code" . "}",
+				$this->api_client->get_serializer()->to_path_value( $code ),
+				$resource_path
+			);
+		}
+		
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'GET',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Guid_Page',
+			'/api/v7/ServiceChannel/municipality/{code}'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Guid_Page', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
+	 * Operation get_service_channel_by_id
+	 *
+	 * Fetches all the information related to a single service channel.
+	 *
+	 * @param string $id Guid (required)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Service_Channels
+	 */
+	public function get_service_channel_by_id( $id ) {
+		list( $response ) = $this->get_service_channel_by_id_with_http_info( $id );
+		return $response;
+	}
+
+	/**
+	 * Operation get_service_channel_by_id_with_http_info
+	 *
+	 * Fetches all the information related to a single service channel.
+	 *
+	 * @param string $id Guid (required)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Service_Channels, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function get_service_channel_by_id_with_http_info( $id ) {
+		// verify the required parameter 'id' is set
+		if ( null === $id ) {
+			throw new InvalidArgumentException( 'Missing the required parameter $id when calling get_service_channel_by_id' );
+		}
+		// parse inputs
+		$resource_path = '/api/v7/ServiceChannel/{id}';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
+
+		// path params
+		if ( null !== $id ) {
+			$resource_path = str_replace(
+				"{" . "id" . "}",
+				$this->api_client->get_serializer()->to_path_value( $id ),
+				$resource_path
+			);
+		}
+		
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'GET',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Service_Channels',
+			'/api/v7/ServiceChannel/{id}'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Service_Channels', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
+	 * Operation get_service_channels
+	 *
+	 * Gets all published service channels within PTV as a list of service channel ids and names.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.  Archived items can be fetched by setting parameter archived to true.
+	 *
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
+	 * @param bool $archived Get archived items by setting archived to true. (optional)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Guid_Page
+	 */
+	public function get_service_channels( $date = null, $page = null, $archived = null ) {
+		list( $response ) = $this->get_service_channels_with_http_info( $date, $page, $archived );
+		return $response;
+	}
+
+	/**
+	 * Operation get_service_channels_with_http_info
+	 *
+	 * Gets all published service channels within PTV as a list of service channel ids and names.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.  Archived items can be fetched by setting parameter archived to true.
+	 *
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
+	 * @param bool $archived Get archived items by setting archived to true. (optional)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Guid_Page, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function get_service_channels_with_http_info( $date = null, $page = null, $archived = null ) {
+		// parse inputs
+		$resource_path = '/api/v7/ServiceChannel';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
+
+		
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'GET',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Guid_Page',
+			'/api/v7/ServiceChannel'
+		);
+
+		if ( is_wp_error( $response ) ) {
+			$response = array( $response, $status_code, $http_header );
+			return $response;
+		}
+
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Guid_Page', $http_header ), $status_code, $http_header );
+	}
+
+
+	/**
+	 * Operation get_service_channels_by_type
+	 *
+	 * Gets a list of certain type of published service channels.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 *
+	 * @param string $type Service channel type (required)
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
+	 * WP_Error on non-2xx response
+	 * @return PTV_Guid_Page
+	 */
+	public function get_service_channels_by_type( $type, $date = null, $page = null ) {
+		list( $response ) = $this->get_service_channels_by_type_with_http_info( $type, $date, $page );
+		return $response;
+	}
+
+	/**
+	 * Operation get_service_channels_by_type_with_http_info
+	 *
+	 * Gets a list of certain type of published service channels.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 *
+	 * @param string $type Service channel type (required)
+	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
+	 * WP_Error on non-2xx response
+	 * @return array of PTV_Guid_Page, HTTP status code, HTTP response headers (array of strings)
+	 */
+	public function get_service_channels_by_type_with_http_info( $type, $date = null, $page = null ) {
+		// verify the required parameter 'type' is set
+		if ( null === $type ) {
+			throw new InvalidArgumentException( 'Missing the required parameter $type when calling get_service_channels_by_type' );
+		}
+		// parse inputs
+		$resource_path = '/api/v7/ServiceChannel/type/{type}';
+		$http_body = '';
+		$query_params = array();
+		$header_params = array();
+		$form_params = array();
+		$_header_accept = $this->api_client->select_header_accept( array( 'text/plain', 'application/json', 'text/json' ) );
+		if ( ! is_null( $_header_accept ) ) {
+			$header_params['Accept'] = $_header_accept;
+		}
+		$header_params['Content-Type'] = $this->api_client->select_header_content_type( array() );
+
+		// path params
+		if ( null !== $type ) {
+			$resource_path = str_replace(
+				"{" . "type" . "}",
+				$this->api_client->get_serializer()->to_path_value( $type ),
+				$resource_path
+			);
+		}
+		
+		// for model (json/xml)
+		if ( isset( $temp_body ) ) {
+			$http_body = $temp_body; // $temp_body is the method argument, if present
+		} elseif ( count( $form_params ) > 0 ) {
+			$http_body = $form_params; // for HTTP post (form)
+		}
+
+		// this endpoint requires OAuth (access token)
+		if ( strlen( $this->api_client->get_config()->get_access_token() ) !== 0 ) {
+			$header_params['Authorization'] = 'Bearer ' . $this->api_client->get_config()->get_access_token();
+		}
+
+		// make the API Call
+		list( $response, $status_code, $http_header ) = $this->api_client->call_api(
+			$resource_path,
+			'GET',
+			$query_params,
+			$http_body,
+			$header_params,
+			'PTV_Guid_Page',
+			'/api/v7/ServiceChannel/type/{type}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -674,35 +917,37 @@ class PTV_Service_Channel_Api {
 	/**
 	 * Operation get_service_channels_for_organization_by_organization_id
 	 *
-	 * Gets a list of published service channels for defined organization.   Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 * Gets a list of published service channels for defined organization.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
 	 *
 	 * @param string $organization_id Guid (required)
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
 	 * WP_Error on non-2xx response
-	 * @return PTV_Service_Channels[]
+	 * @return PTV_Guid_Page
 	 */
-	public function get_service_channels_for_organization_by_organization_id( $organization_id, $date = null ) {
-		list( $response ) = $this->get_service_channels_for_organization_by_organization_id_with_http_info( $organization_id, $date );
+	public function get_service_channels_for_organization_by_organization_id( $organization_id, $date = null, $page = null ) {
+		list( $response ) = $this->get_service_channels_for_organization_by_organization_id_with_http_info( $organization_id, $date, $page );
 		return $response;
 	}
 
 	/**
 	 * Operation get_service_channels_for_organization_by_organization_id_with_http_info
 	 *
-	 * Gets a list of published service channels for defined organization.   Service channels created/modified after certain date can be fetched by adding date as query string parameter.
+	 * Gets a list of published service channels for defined organization.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
 	 *
 	 * @param string $organization_id Guid (required)
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
 	 * WP_Error on non-2xx response
-	 * @return array of PTV_Service_Channels[], HTTP status code, HTTP response headers (array of strings)
+	 * @return array of PTV_Guid_Page, HTTP status code, HTTP response headers (array of strings)
 	 */
-	public function get_service_channels_for_organization_by_organization_id_with_http_info( $organization_id, $date = null ) {
+	public function get_service_channels_for_organization_by_organization_id_with_http_info( $organization_id, $date = null, $page = null ) {
 		// verify the required parameter 'organization_id' is set
 		if ( null === $organization_id ) {
 			throw new InvalidArgumentException( 'Missing the required parameter $organization_id when calling get_service_channels_for_organization_by_organization_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/organization/{organizationId}';
+		$resource_path = '/api/v7/ServiceChannel/organization/{organizationId}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -741,8 +986,8 @@ class PTV_Service_Channel_Api {
 			$query_params,
 			$http_body,
 			$header_params,
-			'PTV_Service_Channels[]',
-			'/api/v5/ServiceChannel/organization/{organizationId}'
+			'PTV_Guid_Page',
+			'/api/v7/ServiceChannel/organization/{organizationId}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -750,48 +995,50 @@ class PTV_Service_Channel_Api {
 			return $response;
 		}
 
-		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Service_Channels[]', $http_header ), $status_code, $http_header );
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Guid_Page', $http_header ), $status_code, $http_header );
 	}
 
 
 	/**
-	 * Operation get_service_channels_for_organization_by_organization_type
+	 * Operation get_service_channels_for_organization_by_type
 	 *
 	 * Gets a list of certain type of published service channels for defined organization.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
 	 *
 	 * @param string $organization_id Guid (required)
 	 * @param string $type Service channel type (required)
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
 	 * WP_Error on non-2xx response
-	 * @return PTV_Service_Channels[]
+	 * @return PTV_Guid_Page
 	 */
-	public function get_service_channels_for_organization_by_organization_type( $organization_id, $type, $date = null ) {
-		list( $response ) = $this->get_service_channels_for_organization_by_organization_type_with_http_info( $organization_id, $type, $date );
+	public function get_service_channels_for_organization_by_type( $organization_id, $type, $date = null, $page = null ) {
+		list( $response ) = $this->get_service_channels_for_organization_by_type_with_http_info( $organization_id, $type, $date, $page );
 		return $response;
 	}
 
 	/**
-	 * Operation get_service_channels_for_organization_by_organization_type_with_http_info
+	 * Operation get_service_channels_for_organization_by_type_with_http_info
 	 *
 	 * Gets a list of certain type of published service channels for defined organization.  Service channels created/modified after certain date can be fetched by adding date as query string parameter.
 	 *
 	 * @param string $organization_id Guid (required)
 	 * @param string $type Service channel type (required)
 	 * @param \DateTime $date Supports only format \&quot;yyyy-MM-ddTHH:mm:ss\&quot; (UTC). (optional)
+	 * @param int $page The page to be fetched. (optional)
 	 * WP_Error on non-2xx response
-	 * @return array of PTV_Service_Channels[], HTTP status code, HTTP response headers (array of strings)
+	 * @return array of PTV_Guid_Page, HTTP status code, HTTP response headers (array of strings)
 	 */
-	public function get_service_channels_for_organization_by_organization_type_with_http_info( $organization_id, $type, $date = null ) {
+	public function get_service_channels_for_organization_by_type_with_http_info( $organization_id, $type, $date = null, $page = null ) {
 		// verify the required parameter 'organization_id' is set
 		if ( null === $organization_id ) {
-			throw new InvalidArgumentException( 'Missing the required parameter $organization_id when calling get_service_channels_for_organization_by_organization_type' );
+			throw new InvalidArgumentException( 'Missing the required parameter $organization_id when calling get_service_channels_for_organization_by_type' );
 		}
 		// verify the required parameter 'type' is set
 		if ( null === $type ) {
-			throw new InvalidArgumentException( 'Missing the required parameter $type when calling get_service_channels_for_organization_by_organization_type' );
+			throw new InvalidArgumentException( 'Missing the required parameter $type when calling get_service_channels_for_organization_by_type' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/organization/{organizationId}/type/{type}';
+		$resource_path = '/api/v7/ServiceChannel/organization/{organizationId}/type/{type}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -838,8 +1085,8 @@ class PTV_Service_Channel_Api {
 			$query_params,
 			$http_body,
 			$header_params,
-			'PTV_Service_Channels[]',
-			'/api/v5/ServiceChannel/organization/{organizationId}/type/{type}'
+			'PTV_Guid_Page',
+			'/api/v7/ServiceChannel/organization/{organizationId}/type/{type}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -847,7 +1094,7 @@ class PTV_Service_Channel_Api {
 			return $response;
 		}
 
-		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Service_Channels[]', $http_header ), $status_code, $http_header );
+		return array( $this->api_client->get_serializer()->deserialize( $response, 'PTV_Guid_Page', $http_header ), $status_code, $http_header );
 	}
 
 
@@ -882,7 +1129,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_echannel_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/EChannel/{id}';
+		$resource_path = '/api/v7/ServiceChannel/EChannel/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -927,7 +1174,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_EChannel_Channel',
-			'/api/v5/ServiceChannel/EChannel/{id}'
+			'/api/v7/ServiceChannel/EChannel/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -970,7 +1217,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $source_id when calling update_echannel_by_source_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/EChannel/sourceId/{sourceId}';
+		$resource_path = '/api/v7/ServiceChannel/EChannel/sourceId/{sourceId}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1015,7 +1262,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_EChannel_Channel',
-			'/api/v5/ServiceChannel/EChannel/sourceId/{sourceId}'
+			'/api/v7/ServiceChannel/EChannel/sourceId/{sourceId}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1058,7 +1305,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_phone_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/Phone/{id}';
+		$resource_path = '/api/v7/ServiceChannel/Phone/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1103,7 +1350,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Phone_Channel',
-			'/api/v5/ServiceChannel/Phone/{id}'
+			'/api/v7/ServiceChannel/Phone/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1146,7 +1393,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $source_id when calling update_phone_by_source_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/Phone/sourceId/{sourceId}';
+		$resource_path = '/api/v7/ServiceChannel/Phone/sourceId/{sourceId}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1191,7 +1438,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Phone_Channel',
-			'/api/v5/ServiceChannel/Phone/sourceId/{sourceId}'
+			'/api/v7/ServiceChannel/Phone/sourceId/{sourceId}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1234,7 +1481,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_printable_form_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/PrintableForm/{id}';
+		$resource_path = '/api/v7/ServiceChannel/PrintableForm/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1279,7 +1526,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Printable_Form_Channel',
-			'/api/v5/ServiceChannel/PrintableForm/{id}'
+			'/api/v7/ServiceChannel/PrintableForm/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1322,7 +1569,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $source_id when calling update_printable_form_by_source_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/PrintableForm/sourceId/{sourceId}';
+		$resource_path = '/api/v7/ServiceChannel/PrintableForm/sourceId/{sourceId}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1367,7 +1614,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Printable_Form_Channel',
-			'/api/v5/ServiceChannel/PrintableForm/sourceId/{sourceId}'
+			'/api/v7/ServiceChannel/PrintableForm/sourceId/{sourceId}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1410,7 +1657,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_service_location_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/ServiceLocation/{id}';
+		$resource_path = '/api/v7/ServiceChannel/ServiceLocation/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1455,7 +1702,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Service_Location_Channel',
-			'/api/v5/ServiceChannel/ServiceLocation/{id}'
+			'/api/v7/ServiceChannel/ServiceLocation/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1498,7 +1745,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $source_id when calling update_service_location_by_source_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/ServiceLocation/sourceId/{sourceId}';
+		$resource_path = '/api/v7/ServiceChannel/ServiceLocation/sourceId/{sourceId}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1543,7 +1790,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Service_Location_Channel',
-			'/api/v5/ServiceChannel/ServiceLocation/sourceId/{sourceId}'
+			'/api/v7/ServiceChannel/ServiceLocation/sourceId/{sourceId}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1586,7 +1833,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $id when calling update_webpage_by_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/WebPage/{id}';
+		$resource_path = '/api/v7/ServiceChannel/WebPage/{id}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1631,7 +1878,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Web_Page_Channel',
-			'/api/v5/ServiceChannel/WebPage/{id}'
+			'/api/v7/ServiceChannel/WebPage/{id}'
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -1674,7 +1921,7 @@ class PTV_Service_Channel_Api {
 			throw new InvalidArgumentException( 'Missing the required parameter $source_id when calling update_webpage_by_source_id' );
 		}
 		// parse inputs
-		$resource_path = '/api/v5/ServiceChannel/WebPage/sourceId/{sourceId}';
+		$resource_path = '/api/v7/ServiceChannel/WebPage/sourceId/{sourceId}';
 		$http_body = '';
 		$query_params = array();
 		$header_params = array();
@@ -1719,7 +1966,7 @@ class PTV_Service_Channel_Api {
 			$http_body,
 			$header_params,
 			'PTV_Web_Page_Channel',
-			'/api/v5/ServiceChannel/WebPage/sourceId/{sourceId}'
+			'/api/v7/ServiceChannel/WebPage/sourceId/{sourceId}'
 		);
 
 		if ( is_wp_error( $response ) ) {

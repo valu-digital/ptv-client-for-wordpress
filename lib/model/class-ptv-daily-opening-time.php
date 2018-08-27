@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -129,9 +129,6 @@ class PTV_Daily_Opening_Time implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
-		if ( null === $this->container['day_from'] ) {
-			$invalid_properties[] = "'day_from' can't be null";
-		}
 		if ( null === $this->container['from'] ) {
 			$invalid_properties[] = "'from' can't be null";
 		}
@@ -149,9 +146,6 @@ class PTV_Daily_Opening_Time implements ArrayAccess {
 	 */
 	public function valid() {
 
-		if ( null === $this->container['day_from'] ) {
-			return false;
-		}
 		if ( null === $this->container['from'] ) {
 			return false;
 		}

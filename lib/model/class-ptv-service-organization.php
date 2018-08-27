@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Service_Organization Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V4 - View Model of service organization
+ * @description OPEN API V6 - View Model of service organization
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -38,11 +38,10 @@ class PTV_Service_Organization implements ArrayAccess {
 	  * @var string[]
 	  */
 	protected static $types = array(
-		'additional_information' => 'PTV_Language_Item[]',
-		'organization_id' => 'string',
-		'role_type' => 'string',
 		'provision_type' => 'string',
-		'web_pages' => 'PTV_Web_Page[]',
+		'organization' => 'PTV_Item',
+		'role_type' => 'string',
+		'additional_information' => 'PTV_Language_Item[]',
 	);
 
 	public static function types() {
@@ -54,11 +53,10 @@ class PTV_Service_Organization implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $attribute_map = array(
-		'additional_information' => 'additionalInformation',
-		'organization_id' => 'organizationId',
-		'role_type' => 'roleType',
 		'provision_type' => 'provisionType',
-		'web_pages' => 'webPages',
+		'organization' => 'organization',
+		'role_type' => 'roleType',
+		'additional_information' => 'additionalInformation',
 	);
 
 
@@ -67,11 +65,10 @@ class PTV_Service_Organization implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $setters = array(
-		'additional_information' => 'set_additional_information',
-		'organization_id' => 'set_organization_id',
-		'role_type' => 'set_role_type',
 		'provision_type' => 'set_provision_type',
-		'web_pages' => 'set_web_pages',
+		'organization' => 'set_organization',
+		'role_type' => 'set_role_type',
+		'additional_information' => 'set_additional_information',
 	);
 
 
@@ -80,11 +77,10 @@ class PTV_Service_Organization implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $getters = array(
-		'additional_information' => 'get_additional_information',
-		'organization_id' => 'get_organization_id',
-		'role_type' => 'get_role_type',
 		'provision_type' => 'get_provision_type',
-		'web_pages' => 'get_web_pages',
+		'organization' => 'get_organization',
+		'role_type' => 'get_role_type',
+		'additional_information' => 'get_additional_information',
 	);
 
 	public static function attribute_map() {
@@ -114,11 +110,10 @@ class PTV_Service_Organization implements ArrayAccess {
 	 * @param mixed[] $data Associated array of property values initializing the model
 	 */
 	public function __construct( array $data = null ) {
-		$this->container['additional_information'] = isset( $data['additional_information'] ) ? $data['additional_information'] : null;
-		$this->container['organization_id'] = isset( $data['organization_id'] ) ? $data['organization_id'] : null;
-		$this->container['role_type'] = isset( $data['role_type'] ) ? $data['role_type'] : null;
 		$this->container['provision_type'] = isset( $data['provision_type'] ) ? $data['provision_type'] : null;
-		$this->container['web_pages'] = isset( $data['web_pages'] ) ? $data['web_pages'] : null;
+		$this->container['organization'] = isset( $data['organization'] ) ? $data['organization'] : null;
+		$this->container['role_type'] = isset( $data['role_type'] ) ? $data['role_type'] : null;
+		$this->container['additional_information'] = isset( $data['additional_information'] ) ? $data['additional_information'] : null;
 	}
 
 	/**
@@ -151,39 +146,39 @@ class PTV_Service_Organization implements ArrayAccess {
 
 
 	/**
-	 * Gets additional_information
-	 * @return PTV_Language_Item[]
+	 * Gets provision_type
+	 * @return string
 	 */
-	public function get_additional_information() {
-		return $this->container['additional_information'];
+	public function get_provision_type() {
+		return $this->container['provision_type'];
 	}
 
 	/**
-	 * Sets additional_information
-	 * @param PTV_Language_Item[] $additional_information Localized list of additional information. (Max.Length: 150).
+	 * Sets provision_type
+	 * @param string $provision_type Provision type, valid values SelfProduced, PurchaseServices or Other. Required if RoleType value is Producer.
 	 * @return $this
 	 */
-	public function set_additional_information( $additional_information ) {
-		$this->container['additional_information'] = $additional_information;
+	public function set_provision_type( $provision_type ) {
+		$this->container['provision_type'] = $provision_type;
 
 		return $this;
 	}
 
 	/**
-	 * Gets organization_id
-	 * @return string
+	 * Gets organization
+	 * @return PTV_Item
 	 */
-	public function get_organization_id() {
-		return $this->container['organization_id'];
+	public function get_organization() {
+		return $this->container['organization'];
 	}
 
 	/**
-	 * Sets organization_id
-	 * @param string $organization_id PTV organization identifier (organization related to the service). Required if role type is Responsible or if ProvisionType is SelfProduced.
+	 * Sets organization
+	 * @param PTV_Item $organization Service channel identifier and name.
 	 * @return $this
 	 */
-	public function set_organization_id( $organization_id ) {
-		$this->container['organization_id'] = $organization_id;
+	public function set_organization( $organization ) {
+		$this->container['organization'] = $organization;
 
 		return $this;
 	}
@@ -198,7 +193,7 @@ class PTV_Service_Organization implements ArrayAccess {
 
 	/**
 	 * Sets role_type
-	 * @param string $role_type Role type, valid values Responsible or Producer.
+	 * @param string $role_type Role type, valid values Responsible or Producer. In version 7 and upper also OtherResponsible role type is used.
 	 * @return $this
 	 */
 	public function set_role_type( $role_type ) {
@@ -208,39 +203,20 @@ class PTV_Service_Organization implements ArrayAccess {
 	}
 
 	/**
-	 * Gets provision_type
-	 * @return string
+	 * Gets additional_information
+	 * @return PTV_Language_Item[]
 	 */
-	public function get_provision_type() {
-		return $this->container['provision_type'];
+	public function get_additional_information() {
+		return $this->container['additional_information'];
 	}
 
 	/**
-	 * Sets provision_type
-	 * @param string $provision_type Provision type, valid values SelfProduced, PurchaseServices, Other or VoucherServices. Required if RoleType value is Producer.
+	 * Sets additional_information
+	 * @param PTV_Language_Item[] $additional_information Localized list of additional information.
 	 * @return $this
 	 */
-	public function set_provision_type( $provision_type ) {
-		$this->container['provision_type'] = $provision_type;
-
-		return $this;
-	}
-
-	/**
-	 * Gets web_pages
-	 * @return PTV_Web_Page[]
-	 */
-	public function get_web_pages() {
-		return $this->container['web_pages'];
-	}
-
-	/**
-	 * Sets web_pages
-	 * @param PTV_Web_Page[] $web_pages List of web pages.
-	 * @return $this
-	 */
-	public function set_web_pages( $web_pages ) {
-		$this->container['web_pages'] = $web_pages;
+	public function set_additional_information( $additional_information ) {
+		$this->container['additional_information'] = $additional_information;
 
 		return $this;
 	}

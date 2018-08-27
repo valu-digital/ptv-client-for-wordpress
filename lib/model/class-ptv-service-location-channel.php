@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Service_Location_Channel Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of service location channel
+ * @description OPEN API V7 - View Model of service location channel
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -39,6 +39,7 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	  */
 	protected static $types = array(
 		'id' => 'string',
+		'source_id' => 'string',
 		'service_channel_type' => 'string',
 		'organization_id' => 'string',
 		'service_channel_names' => 'PTV_Localized_List_Item[]',
@@ -48,11 +49,12 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 		'phone_numbers' => 'PTV_Phone_With_Type[]',
 		'emails' => 'PTV_Language_Item[]',
 		'languages' => 'string[]',
-		'phone_service_charge' => 'bool',
 		'web_pages' => 'PTV_Web_Page_With_Order_Number[]',
-		'addresses' => 'PTV_Address_With_Type_And_Coordinates[]',
+		'addresses' => 'PTV_Address_With_Moving[]',
 		'service_hours' => 'PTV_Service_Hour[]',
+		'services' => 'PTV_Service_Channel_Service[]',
 		'publishing_status' => 'string',
+		'modified' => '\DateTime',
 	);
 
 	public static function types() {
@@ -65,6 +67,7 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	 */
 	protected static $attribute_map = array(
 		'id' => 'id',
+		'source_id' => 'sourceId',
 		'service_channel_type' => 'serviceChannelType',
 		'organization_id' => 'organizationId',
 		'service_channel_names' => 'serviceChannelNames',
@@ -74,11 +77,12 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 		'phone_numbers' => 'phoneNumbers',
 		'emails' => 'emails',
 		'languages' => 'languages',
-		'phone_service_charge' => 'phoneServiceCharge',
 		'web_pages' => 'webPages',
 		'addresses' => 'addresses',
 		'service_hours' => 'serviceHours',
+		'services' => 'services',
 		'publishing_status' => 'publishingStatus',
+		'modified' => 'modified',
 	);
 
 
@@ -88,6 +92,7 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	 */
 	protected static $setters = array(
 		'id' => 'set_id',
+		'source_id' => 'set_source_id',
 		'service_channel_type' => 'set_service_channel_type',
 		'organization_id' => 'set_organization_id',
 		'service_channel_names' => 'set_service_channel_names',
@@ -97,11 +102,12 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 		'phone_numbers' => 'set_phone_numbers',
 		'emails' => 'set_emails',
 		'languages' => 'set_languages',
-		'phone_service_charge' => 'set_phone_service_charge',
 		'web_pages' => 'set_web_pages',
 		'addresses' => 'set_addresses',
 		'service_hours' => 'set_service_hours',
+		'services' => 'set_services',
 		'publishing_status' => 'set_publishing_status',
+		'modified' => 'set_modified',
 	);
 
 
@@ -111,6 +117,7 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	 */
 	protected static $getters = array(
 		'id' => 'get_id',
+		'source_id' => 'get_source_id',
 		'service_channel_type' => 'get_service_channel_type',
 		'organization_id' => 'get_organization_id',
 		'service_channel_names' => 'get_service_channel_names',
@@ -120,11 +127,12 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 		'phone_numbers' => 'get_phone_numbers',
 		'emails' => 'get_emails',
 		'languages' => 'get_languages',
-		'phone_service_charge' => 'get_phone_service_charge',
 		'web_pages' => 'get_web_pages',
 		'addresses' => 'get_addresses',
 		'service_hours' => 'get_service_hours',
+		'services' => 'get_services',
 		'publishing_status' => 'get_publishing_status',
+		'modified' => 'get_modified',
 	);
 
 	public static function attribute_map() {
@@ -155,6 +163,7 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	 */
 	public function __construct( array $data = null ) {
 		$this->container['id'] = isset( $data['id'] ) ? $data['id'] : null;
+		$this->container['source_id'] = isset( $data['source_id'] ) ? $data['source_id'] : null;
 		$this->container['service_channel_type'] = isset( $data['service_channel_type'] ) ? $data['service_channel_type'] : null;
 		$this->container['organization_id'] = isset( $data['organization_id'] ) ? $data['organization_id'] : null;
 		$this->container['service_channel_names'] = isset( $data['service_channel_names'] ) ? $data['service_channel_names'] : null;
@@ -164,11 +173,12 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 		$this->container['phone_numbers'] = isset( $data['phone_numbers'] ) ? $data['phone_numbers'] : null;
 		$this->container['emails'] = isset( $data['emails'] ) ? $data['emails'] : null;
 		$this->container['languages'] = isset( $data['languages'] ) ? $data['languages'] : null;
-		$this->container['phone_service_charge'] = isset( $data['phone_service_charge'] ) ? $data['phone_service_charge'] : null;
 		$this->container['web_pages'] = isset( $data['web_pages'] ) ? $data['web_pages'] : null;
 		$this->container['addresses'] = isset( $data['addresses'] ) ? $data['addresses'] : null;
 		$this->container['service_hours'] = isset( $data['service_hours'] ) ? $data['service_hours'] : null;
+		$this->container['services'] = isset( $data['services'] ) ? $data['services'] : null;
 		$this->container['publishing_status'] = isset( $data['publishing_status'] ) ? $data['publishing_status'] : null;
+		$this->container['modified'] = isset( $data['modified'] ) ? $data['modified'] : null;
 	}
 
 	/**
@@ -179,6 +189,13 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
+		if ( ! is_null( $this->container['source_id'] ) && ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			$invalid_properties[] = "invalid value for 'source_id', must be conform to the pattern /^[A-Za-z0-9-.]*$/.";
+		}
+
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -190,6 +207,12 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	 */
 	public function valid() {
 
+		if ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			return false;
+		}
+		if ( null === $this->container['publishing_status'] ) {
+			return false;
+		}
 		return true;
 	}
 
@@ -209,6 +232,30 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	 */
 	public function set_id( $id ) {
 		$this->container['id'] = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Gets source_id
+	 * @return string
+	 */
+	public function get_source_id() {
+		return $this->container['source_id'];
+	}
+
+	/**
+	 * Sets source_id
+	 * @param string $source_id External system identifier for this service channel. User needs to be logged in to be able to get/set value.
+	 * @return $this
+	 */
+	public function set_source_id( $source_id ) {
+
+		if ( ! is_null( $source_id ) && ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $source_id ) ) ) {
+			throw new InvalidArgumentException( "invalid value for $source_id when calling PTV_Service_Location_Channel., must conform to the pattern /^[A-Za-z0-9-.]*$/." );
+		}
+
+		$this->container['source_id'] = $source_id;
 
 		return $this;
 	}
@@ -385,25 +432,6 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	}
 
 	/**
-	 * Gets phone_service_charge
-	 * @return bool
-	 */
-	public function get_phone_service_charge() {
-		return $this->container['phone_service_charge'];
-	}
-
-	/**
-	 * Sets phone_service_charge
-	 * @param bool $phone_service_charge Is the phone service charged for. This property is not used in the API anymore. Do not use.
-	 * @return $this
-	 */
-	public function set_phone_service_charge( $phone_service_charge ) {
-		$this->container['phone_service_charge'] = $phone_service_charge;
-
-		return $this;
-	}
-
-	/**
 	 * Gets web_pages
 	 * @return PTV_Web_Page_With_Order_Number[]
 	 */
@@ -424,7 +452,7 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 
 	/**
 	 * Gets addresses
-	 * @return PTV_Address_With_Type_And_Coordinates[]
+	 * @return PTV_Address_With_Moving[]
 	 */
 	public function get_addresses() {
 		return $this->container['addresses'];
@@ -432,7 +460,7 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 
 	/**
 	 * Sets addresses
-	 * @param PTV_Address_With_Type_And_Coordinates[] $addresses List of service location addresses.
+	 * @param PTV_Address_With_Moving[] $addresses List of service location addresses.
 	 * @return $this
 	 */
 	public function set_addresses( $addresses ) {
@@ -461,6 +489,25 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	}
 
 	/**
+	 * Gets services
+	 * @return PTV_Service_Channel_Service[]
+	 */
+	public function get_services() {
+		return $this->container['services'];
+	}
+
+	/**
+	 * Sets services
+	 * @param PTV_Service_Channel_Service[] $services List of linked services including relationship data.
+	 * @return $this
+	 */
+	public function set_services( $services ) {
+		$this->container['services'] = $services;
+
+		return $this;
+	}
+
+	/**
 	 * Gets publishing_status
 	 * @return string
 	 */
@@ -475,6 +522,25 @@ class PTV_Service_Location_Channel implements ArrayAccess {
 	 */
 	public function set_publishing_status( $publishing_status ) {
 		$this->container['publishing_status'] = $publishing_status;
+
+		return $this;
+	}
+
+	/**
+	 * Gets modified
+	 * @return \DateTime
+	 */
+	public function get_modified() {
+		return $this->container['modified'];
+	}
+
+	/**
+	 * Sets modified
+	 * @param \DateTime $modified Date when item was modified/created (UTC).
+	 * @return $this
+	 */
+	public function set_modified( $modified ) {
+		$this->container['modified'] = $modified;
 
 		return $this;
 	}

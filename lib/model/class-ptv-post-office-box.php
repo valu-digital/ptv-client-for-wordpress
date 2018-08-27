@@ -1,6 +1,6 @@
 <?php
 /**
- * PTV_Address_With_Coordinates
+ * PTV_Post_Office_Box
  *
  * PHP version 5
  *
@@ -12,43 +12,37 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
 
 /**
- * PTV_Address_With_Coordinates Class Doc Comment
+ * PTV_Post_Office_Box Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of address with coordinates
+ * @description OPEN API V7 - View Model of post office box address.
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
-class PTV_Address_With_Coordinates implements ArrayAccess {
+class PTV_Post_Office_Box implements ArrayAccess {
 
 	/**
 	  * The original name of the model.
 	  * @var string
 	  */
-	protected static $model_name = 'PTV_Address_With_Coordinates';
+	protected static $model_name = 'PTV_Post_Office_Box';
 
 	/**
 	  * Array of property to type mappings. Used for (de)serialization
 	  * @var string[]
 	  */
 	protected static $types = array(
-		'latitude' => 'string',
-		'longitude' => 'string',
-		'coordinate_state' => 'string',
 		'post_office_box' => 'PTV_Language_Item[]',
 		'postal_code' => 'string',
 		'post_office' => 'PTV_Language_Item[]',
-		'street_address' => 'PTV_Language_Item[]',
-		'street_number' => 'string',
 		'municipality' => 'PTV_Municipality',
-		'country' => 'string',
-		'additional_informations' => 'PTV_Language_Item[]',
+		'additional_information' => 'PTV_Language_Item[]',
 	);
 
 	public static function types() {
@@ -60,17 +54,11 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $attribute_map = array(
-		'latitude' => 'latitude',
-		'longitude' => 'longitude',
-		'coordinate_state' => 'coordinateState',
 		'post_office_box' => 'postOfficeBox',
 		'postal_code' => 'postalCode',
 		'post_office' => 'postOffice',
-		'street_address' => 'streetAddress',
-		'street_number' => 'streetNumber',
 		'municipality' => 'municipality',
-		'country' => 'country',
-		'additional_informations' => 'additionalInformations',
+		'additional_information' => 'additionalInformation',
 	);
 
 
@@ -79,17 +67,11 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $setters = array(
-		'latitude' => 'set_latitude',
-		'longitude' => 'set_longitude',
-		'coordinate_state' => 'set_coordinate_state',
 		'post_office_box' => 'set_post_office_box',
 		'postal_code' => 'set_postal_code',
 		'post_office' => 'set_post_office',
-		'street_address' => 'set_street_address',
-		'street_number' => 'set_street_number',
 		'municipality' => 'set_municipality',
-		'country' => 'set_country',
-		'additional_informations' => 'set_additional_informations',
+		'additional_information' => 'set_additional_information',
 	);
 
 
@@ -98,17 +80,11 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	 * @var string[]
 	 */
 	protected static $getters = array(
-		'latitude' => 'get_latitude',
-		'longitude' => 'get_longitude',
-		'coordinate_state' => 'get_coordinate_state',
 		'post_office_box' => 'get_post_office_box',
 		'postal_code' => 'get_postal_code',
 		'post_office' => 'get_post_office',
-		'street_address' => 'get_street_address',
-		'street_number' => 'get_street_number',
 		'municipality' => 'get_municipality',
-		'country' => 'get_country',
-		'additional_informations' => 'get_additional_informations',
+		'additional_information' => 'get_additional_information',
 	);
 
 	public static function attribute_map() {
@@ -138,17 +114,11 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	 * @param mixed[] $data Associated array of property values initializing the model
 	 */
 	public function __construct( array $data = null ) {
-		$this->container['latitude'] = isset( $data['latitude'] ) ? $data['latitude'] : null;
-		$this->container['longitude'] = isset( $data['longitude'] ) ? $data['longitude'] : null;
-		$this->container['coordinate_state'] = isset( $data['coordinate_state'] ) ? $data['coordinate_state'] : null;
 		$this->container['post_office_box'] = isset( $data['post_office_box'] ) ? $data['post_office_box'] : null;
 		$this->container['postal_code'] = isset( $data['postal_code'] ) ? $data['postal_code'] : null;
 		$this->container['post_office'] = isset( $data['post_office'] ) ? $data['post_office'] : null;
-		$this->container['street_address'] = isset( $data['street_address'] ) ? $data['street_address'] : null;
-		$this->container['street_number'] = isset( $data['street_number'] ) ? $data['street_number'] : null;
 		$this->container['municipality'] = isset( $data['municipality'] ) ? $data['municipality'] : null;
-		$this->container['country'] = isset( $data['country'] ) ? $data['country'] : null;
-		$this->container['additional_informations'] = isset( $data['additional_informations'] ) ? $data['additional_informations'] : null;
+		$this->container['additional_information'] = isset( $data['additional_information'] ) ? $data['additional_information'] : null;
 	}
 
 	/**
@@ -159,15 +129,14 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	public function list_invalid_properties() {
 		$invalid_properties = array();
 
+		if ( null === $this->container['post_office_box'] ) {
+			$invalid_properties[] = "'post_office_box' can't be null";
+		}
 		if ( null === $this->container['postal_code'] ) {
 			$invalid_properties[] = "'postal_code' can't be null";
 		}
 		if ( ! preg_match( '/\\d{5}?/', $this->container['postal_code'] ) ) {
 			$invalid_properties[] = "invalid value for 'postal_code', must be conform to the pattern /\\d{5}?/.";
-		}
-
-		if ( ! is_null( $this->container['country'] ) && ! preg_match( '/^[A-Z]{2}$/', $this->container['country'] ) ) {
-			$invalid_properties[] = "invalid value for 'country', must be conform to the pattern /^[A-Z]{2}$/.";
 		}
 
 		return $invalid_properties;
@@ -181,75 +150,18 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	 */
 	public function valid() {
 
+		if ( null === $this->container['post_office_box'] ) {
+			return false;
+		}
 		if ( null === $this->container['postal_code'] ) {
 			return false;
 		}
 		if ( ! preg_match( '/\\d{5}?/', $this->container['postal_code'] ) ) {
 			return false;
 		}
-		if ( ! preg_match( '/^[A-Z]{2}$/', $this->container['country'] ) ) {
-			return false;
-		}
 		return true;
 	}
 
-
-	/**
-	 * Gets latitude
-	 * @return string
-	 */
-	public function get_latitude() {
-		return $this->container['latitude'];
-	}
-
-	/**
-	 * Sets latitude
-	 * @param string $latitude Service location latitude coordinate.
-	 * @return $this
-	 */
-	public function set_latitude( $latitude ) {
-		$this->container['latitude'] = $latitude;
-
-		return $this;
-	}
-
-	/**
-	 * Gets longitude
-	 * @return string
-	 */
-	public function get_longitude() {
-		return $this->container['longitude'];
-	}
-
-	/**
-	 * Sets longitude
-	 * @param string $longitude Service location longitude coordinate.
-	 * @return $this
-	 */
-	public function set_longitude( $longitude ) {
-		$this->container['longitude'] = $longitude;
-
-		return $this;
-	}
-
-	/**
-	 * Gets coordinate_state
-	 * @return string
-	 */
-	public function get_coordinate_state() {
-		return $this->container['coordinate_state'];
-	}
-
-	/**
-	 * Sets coordinate_state
-	 * @param string $coordinate_state State of coordinates. Coordinates are fetched from a service provided by Maanmittauslaitos (WFS).  Possible values are: Loading, Ok, Failed, NotReceived, EmptyInputReceived, MultipleResultsReceived, WrongFormatReceived or EnteredByUser.
-	 * @return $this
-	 */
-	public function set_coordinate_state( $coordinate_state ) {
-		$this->container['coordinate_state'] = $coordinate_state;
-
-		return $this;
-	}
 
 	/**
 	 * Gets post_office_box
@@ -261,7 +173,7 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 
 	/**
 	 * Sets post_office_box
-	 * @param PTV_Language_Item[] $post_office_box Post office box like PL 310
+	 * @param PTV_Language_Item[] $post_office_box Post office box like PL 310 (Max.Length: 100).
 	 * @return $this
 	 */
 	public function set_post_office_box( $post_office_box ) {
@@ -280,13 +192,13 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 
 	/**
 	 * Sets postal_code
-	 * @param string $postal_code Postal code, for example 00010.
+	 * @param string $postal_code Postal code, for example 00100.
 	 * @return $this
 	 */
 	public function set_postal_code( $postal_code ) {
 
 		if ( ( ! preg_match( '/\\d{5}?/', $postal_code ) ) ) {
-			throw new InvalidArgumentException( "invalid value for $postal_code when calling PTV_Address_With_Coordinates., must conform to the pattern /\\d{5}?/." );
+			throw new InvalidArgumentException( "invalid value for $postal_code when calling PTV_Post_Office_Box., must conform to the pattern /\\d{5}?/." );
 		}
 
 		$this->container['postal_code'] = $postal_code;
@@ -314,44 +226,6 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	}
 
 	/**
-	 * Gets street_address
-	 * @return PTV_Language_Item[]
-	 */
-	public function get_street_address() {
-		return $this->container['street_address'];
-	}
-
-	/**
-	 * Sets street_address
-	 * @param PTV_Language_Item[] $street_address List of localized street addresses.
-	 * @return $this
-	 */
-	public function set_street_address( $street_address ) {
-		$this->container['street_address'] = $street_address;
-
-		return $this;
-	}
-
-	/**
-	 * Gets street_number
-	 * @return string
-	 */
-	public function get_street_number() {
-		return $this->container['street_number'];
-	}
-
-	/**
-	 * Sets street_number
-	 * @param string $street_number Street number for street address.
-	 * @return $this
-	 */
-	public function set_street_number( $street_number ) {
-		$this->container['street_number'] = $street_number;
-
-		return $this;
-	}
-
-	/**
 	 * Gets municipality
 	 * @return PTV_Municipality
 	 */
@@ -361,7 +235,7 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 
 	/**
 	 * Sets municipality
-	 * @param PTV_Municipality $municipality Municipality including municipality code and a localized list of municipality names.
+	 * @param PTV_Municipality $municipality Municipality code (e.g. 091).
 	 * @return $this
 	 */
 	public function set_municipality( $municipality ) {
@@ -371,44 +245,20 @@ class PTV_Address_With_Coordinates implements ArrayAccess {
 	}
 
 	/**
-	 * Gets country
-	 * @return string
-	 */
-	public function get_country() {
-		return $this->container['country'];
-	}
-
-	/**
-	 * Sets country
-	 * @param string $country Country code (ISO 3166-1 alpha-2), for example FI.
-	 * @return $this
-	 */
-	public function set_country( $country ) {
-
-		if ( ! is_null( $country ) && ( ! preg_match( '/^[A-Z]{2}$/', $country ) ) ) {
-			throw new InvalidArgumentException( "invalid value for $country when calling PTV_Address_With_Coordinates., must conform to the pattern /^[A-Z]{2}$/." );
-		}
-
-		$this->container['country'] = $country;
-
-		return $this;
-	}
-
-	/**
-	 * Gets additional_informations
+	 * Gets additional_information
 	 * @return PTV_Language_Item[]
 	 */
-	public function get_additional_informations() {
-		return $this->container['additional_informations'];
+	public function get_additional_information() {
+		return $this->container['additional_information'];
 	}
 
 	/**
-	 * Sets additional_informations
-	 * @param PTV_Language_Item[] $additional_informations Localized list of additional information about the address.
+	 * Sets additional_information
+	 * @param PTV_Language_Item[] $additional_information Localized list of additional information about the address. (Max.Length: 150).
 	 * @return $this
 	 */
-	public function set_additional_informations( $additional_informations ) {
-		$this->container['additional_informations'] = $additional_informations;
+	public function set_additional_information( $additional_information ) {
+		$this->container['additional_information'] = $additional_information;
 
 		return $this;
 	}

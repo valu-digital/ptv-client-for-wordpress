@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -117,6 +117,9 @@ class PTV_Area_In implements ArrayAccess {
 		if ( null === $this->container['type'] ) {
 			$invalid_properties[] = "'type' can't be null";
 		}
+		if ( null === $this->container['area_codes'] ) {
+			$invalid_properties[] = "'area_codes' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -129,6 +132,9 @@ class PTV_Area_In implements ArrayAccess {
 	public function valid() {
 
 		if ( null === $this->container['type'] ) {
+			return false;
+		}
+		if ( null === $this->container['area_codes'] ) {
 			return false;
 		}
 		return true;

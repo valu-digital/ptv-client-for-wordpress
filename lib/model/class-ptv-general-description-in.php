@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -175,6 +175,18 @@ class PTV_General_Description_In implements ArrayAccess {
 		if ( null === $this->container['descriptions'] ) {
 			$invalid_properties[] = "'descriptions' can't be null";
 		}
+		if ( null === $this->container['languages'] ) {
+			$invalid_properties[] = "'languages' can't be null";
+		}
+		if ( null === $this->container['service_classes'] ) {
+			$invalid_properties[] = "'service_classes' can't be null";
+		}
+		if ( null === $this->container['ontology_terms'] ) {
+			$invalid_properties[] = "'ontology_terms' can't be null";
+		}
+		if ( null === $this->container['target_groups'] ) {
+			$invalid_properties[] = "'target_groups' can't be null";
+		}
 		if ( null === $this->container['publishing_status'] ) {
 			$invalid_properties[] = "'publishing_status' can't be null";
 		}
@@ -193,6 +205,18 @@ class PTV_General_Description_In implements ArrayAccess {
 			return false;
 		}
 		if ( null === $this->container['descriptions'] ) {
+			return false;
+		}
+		if ( null === $this->container['languages'] ) {
+			return false;
+		}
+		if ( null === $this->container['service_classes'] ) {
+			return false;
+		}
+		if ( null === $this->container['ontology_terms'] ) {
+			return false;
+		}
+		if ( null === $this->container['target_groups'] ) {
 			return false;
 		}
 		if ( null === $this->container['publishing_status'] ) {
@@ -383,7 +407,7 @@ class PTV_General_Description_In implements ArrayAccess {
 
 	/**
 	 * Sets type
-	 * @param string $type Service type. Possible values are: Service or PermissionAndObligation.
+	 * @param string $type Service type. Possible values are: Service, PermissionAndObligation or ProfessionalQualifications.
 	 * @return $this
 	 */
 	public function set_type( $type ) {

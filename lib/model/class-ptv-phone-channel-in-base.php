@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Phone_Channel_In_Base Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of phone channel for IN api - base
+ * @description OPEN API V7 - View Model of phone channel for IN api - base
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -44,7 +44,7 @@ class PTV_Phone_Channel_In_Base implements ArrayAccess {
 		'service_channel_descriptions' => 'PTV_Localized_List_Item[]',
 		'area_type' => 'string',
 		'areas' => 'PTV_Area_In[]',
-		'phone_numbers' => 'PTV_Phone_Channel_Phone[]',
+		'phone_numbers' => 'PTV_Phone_With_Type[]',
 		'urls' => 'PTV_Language_Item[]',
 		'support_emails' => 'PTV_Language_Item[]',
 		'languages' => 'string[]',
@@ -183,6 +183,9 @@ class PTV_Phone_Channel_In_Base implements ArrayAccess {
 			$invalid_properties[] = "invalid value for 'source_id', must be conform to the pattern /^[A-Za-z0-9-.]*$/.";
 		}
 
+		if ( null === $this->container['publishing_status'] ) {
+			$invalid_properties[] = "'publishing_status' can't be null";
+		}
 		return $invalid_properties;
 	}
 
@@ -195,6 +198,9 @@ class PTV_Phone_Channel_In_Base implements ArrayAccess {
 	public function valid() {
 
 		if ( ! preg_match( '/^[A-Za-z0-9-.]*$/', $this->container['source_id'] ) ) {
+			return false;
+		}
+		if ( null === $this->container['publishing_status'] ) {
 			return false;
 		}
 		return true;
@@ -211,7 +217,7 @@ class PTV_Phone_Channel_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets source_id
-	 * @param string $source_id External system identifier for this service channel.
+	 * @param string $source_id External system identifier for this service channel. User needs to be logged in to be able to get/set value.
 	 * @return $this
 	 */
 	public function set_source_id( $source_id ) {
@@ -322,7 +328,7 @@ class PTV_Phone_Channel_In_Base implements ArrayAccess {
 
 	/**
 	 * Gets phone_numbers
-	 * @return PTV_Phone_Channel_Phone[]
+	 * @return PTV_Phone_With_Type[]
 	 */
 	public function get_phone_numbers() {
 		return $this->container['phone_numbers'];
@@ -330,7 +336,7 @@ class PTV_Phone_Channel_In_Base implements ArrayAccess {
 
 	/**
 	 * Sets phone_numbers
-	 * @param PTV_Phone_Channel_Phone[] $phone_numbers List of phone numbers for the service channel.
+	 * @param PTV_Phone_With_Type[] $phone_numbers List of phone numbers for the service channel.
 	 * @return $this
 	 */
 	public function set_phone_numbers( $phone_numbers ) {

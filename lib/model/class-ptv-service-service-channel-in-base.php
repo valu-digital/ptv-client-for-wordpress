@@ -12,7 +12,7 @@
 /**
  * PTV Client for WordPress
  *
- * PTV Open API Version: v5
+ * PTV Open API Version: v7
  *
  */
 
@@ -21,7 +21,7 @@
  * PTV_Service_Service_Channel_In_Base Class Doc Comment
  *
  * @category    Class
- * @description OPEN API V5 - View Model of service service channel IN.
+ * @description OPEN API V7 - View Model of service service channel IN.
  * @author      Valu Digital
  * @link        https://www.valu.fi
  */
@@ -39,8 +39,13 @@ class PTV_Service_Service_Channel_In_Base implements ArrayAccess {
 	  */
 	protected static $types = array(
 		'service_channel_id' => 'string',
-		'description' => 'PTV_Localized_List_Item[]',
 		'service_charge_type' => 'string',
+		'description' => 'PTV_Localized_List_Item[]',
+		'service_hours' => 'PTV_Service_Hour[]',
+		'contact_details' => 'PTV_Contact_Details_In_Base',
+		'delete_service_charge_type' => 'bool',
+		'delete_all_descriptions' => 'bool',
+		'delete_all_service_hours' => 'bool',
 	);
 
 	public static function types() {
@@ -53,8 +58,13 @@ class PTV_Service_Service_Channel_In_Base implements ArrayAccess {
 	 */
 	protected static $attribute_map = array(
 		'service_channel_id' => 'serviceChannelId',
-		'description' => 'description',
 		'service_charge_type' => 'serviceChargeType',
+		'description' => 'description',
+		'service_hours' => 'serviceHours',
+		'contact_details' => 'contactDetails',
+		'delete_service_charge_type' => 'deleteServiceChargeType',
+		'delete_all_descriptions' => 'deleteAllDescriptions',
+		'delete_all_service_hours' => 'deleteAllServiceHours',
 	);
 
 
@@ -64,8 +74,13 @@ class PTV_Service_Service_Channel_In_Base implements ArrayAccess {
 	 */
 	protected static $setters = array(
 		'service_channel_id' => 'set_service_channel_id',
-		'description' => 'set_description',
 		'service_charge_type' => 'set_service_charge_type',
+		'description' => 'set_description',
+		'service_hours' => 'set_service_hours',
+		'contact_details' => 'set_contact_details',
+		'delete_service_charge_type' => 'set_delete_service_charge_type',
+		'delete_all_descriptions' => 'set_delete_all_descriptions',
+		'delete_all_service_hours' => 'set_delete_all_service_hours',
 	);
 
 
@@ -75,8 +90,13 @@ class PTV_Service_Service_Channel_In_Base implements ArrayAccess {
 	 */
 	protected static $getters = array(
 		'service_channel_id' => 'get_service_channel_id',
-		'description' => 'get_description',
 		'service_charge_type' => 'get_service_charge_type',
+		'description' => 'get_description',
+		'service_hours' => 'get_service_hours',
+		'contact_details' => 'get_contact_details',
+		'delete_service_charge_type' => 'get_delete_service_charge_type',
+		'delete_all_descriptions' => 'get_delete_all_descriptions',
+		'delete_all_service_hours' => 'get_delete_all_service_hours',
 	);
 
 	public static function attribute_map() {
@@ -107,8 +127,13 @@ class PTV_Service_Service_Channel_In_Base implements ArrayAccess {
 	 */
 	public function __construct( array $data = null ) {
 		$this->container['service_channel_id'] = isset( $data['service_channel_id'] ) ? $data['service_channel_id'] : null;
-		$this->container['description'] = isset( $data['description'] ) ? $data['description'] : null;
 		$this->container['service_charge_type'] = isset( $data['service_charge_type'] ) ? $data['service_charge_type'] : null;
+		$this->container['description'] = isset( $data['description'] ) ? $data['description'] : null;
+		$this->container['service_hours'] = isset( $data['service_hours'] ) ? $data['service_hours'] : null;
+		$this->container['contact_details'] = isset( $data['contact_details'] ) ? $data['contact_details'] : null;
+		$this->container['delete_service_charge_type'] = isset( $data['delete_service_charge_type'] ) ? $data['delete_service_charge_type'] : null;
+		$this->container['delete_all_descriptions'] = isset( $data['delete_all_descriptions'] ) ? $data['delete_all_descriptions'] : null;
+		$this->container['delete_all_service_hours'] = isset( $data['delete_all_service_hours'] ) ? $data['delete_all_service_hours'] : null;
 	}
 
 	/**
@@ -160,6 +185,25 @@ class PTV_Service_Service_Channel_In_Base implements ArrayAccess {
 	}
 
 	/**
+	 * Gets service_charge_type
+	 * @return string
+	 */
+	public function get_service_charge_type() {
+		return $this->container['service_charge_type'];
+	}
+
+	/**
+	 * Sets service_charge_type
+	 * @param string $service_charge_type Service charge type. Possible values are: Charged, Free or Other
+	 * @return $this
+	 */
+	public function set_service_charge_type( $service_charge_type ) {
+		$this->container['service_charge_type'] = $service_charge_type;
+
+		return $this;
+	}
+
+	/**
 	 * Gets description
 	 * @return PTV_Localized_List_Item[]
 	 */
@@ -179,20 +223,96 @@ class PTV_Service_Service_Channel_In_Base implements ArrayAccess {
 	}
 
 	/**
-	 * Gets service_charge_type
-	 * @return string
+	 * Gets service_hours
+	 * @return PTV_Service_Hour[]
 	 */
-	public function get_service_charge_type() {
-		return $this->container['service_charge_type'];
+	public function get_service_hours() {
+		return $this->container['service_hours'];
 	}
 
 	/**
-	 * Sets service_charge_type
-	 * @param string $service_charge_type Service charge type. Possible values are: Charged, Free or Other
+	 * Sets service_hours
+	 * @param PTV_Service_Hour[] $service_hours List of connection related service hours.
 	 * @return $this
 	 */
-	public function set_service_charge_type( $service_charge_type ) {
-		$this->container['service_charge_type'] = $service_charge_type;
+	public function set_service_hours( $service_hours ) {
+		$this->container['service_hours'] = $service_hours;
+
+		return $this;
+	}
+
+	/**
+	 * Gets contact_details
+	 * @return PTV_Contact_Details_In_Base
+	 */
+	public function get_contact_details() {
+		return $this->container['contact_details'];
+	}
+
+	/**
+	 * Sets contact_details
+	 * @param PTV_Contact_Details_In_Base $contact_details List of connection related service hours.
+	 * @return $this
+	 */
+	public function set_contact_details( $contact_details ) {
+		$this->container['contact_details'] = $contact_details;
+
+		return $this;
+	}
+
+	/**
+	 * Gets delete_service_charge_type
+	 * @return bool
+	 */
+	public function get_delete_service_charge_type() {
+		return $this->container['delete_service_charge_type'];
+	}
+
+	/**
+	 * Sets delete_service_charge_type
+	 * @param bool $delete_service_charge_type Indicates if value for property ServiceChargeType should be deleted.
+	 * @return $this
+	 */
+	public function set_delete_service_charge_type( $delete_service_charge_type ) {
+		$this->container['delete_service_charge_type'] = $delete_service_charge_type;
+
+		return $this;
+	}
+
+	/**
+	 * Gets delete_all_descriptions
+	 * @return bool
+	 */
+	public function get_delete_all_descriptions() {
+		return $this->container['delete_all_descriptions'];
+	}
+
+	/**
+	 * Sets delete_all_descriptions
+	 * @param bool $delete_all_descriptions Indicates if all descriptions should be deleted.
+	 * @return $this
+	 */
+	public function set_delete_all_descriptions( $delete_all_descriptions ) {
+		$this->container['delete_all_descriptions'] = $delete_all_descriptions;
+
+		return $this;
+	}
+
+	/**
+	 * Gets delete_all_service_hours
+	 * @return bool
+	 */
+	public function get_delete_all_service_hours() {
+		return $this->container['delete_all_service_hours'];
+	}
+
+	/**
+	 * Sets delete_all_service_hours
+	 * @param bool $delete_all_service_hours Gets or sets a value indicating whether all service hours should be delted.
+	 * @return $this
+	 */
+	public function set_delete_all_service_hours( $delete_all_service_hours ) {
+		$this->container['delete_all_service_hours'] = $delete_all_service_hours;
 
 		return $this;
 	}
